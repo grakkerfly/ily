@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ILY Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="portal-container">
+    <!-- Central heart -->
+    <div class="heart-container">
+      <a href="main.html" id="heart-link">
+        <img src="IMAGES/heart.png" alt="ILY Heart" class="heart" id="heart">
+      </a>
+      <div class="heart-glow"></div>
+    </div>
+
+    <!-- Text THERE IS NO CAP, ILY -->
+    <div class="enter-text">There is no cap, ILY</div>
+
+    <!-- Orbiting elements -->
+    <div class="orbit" style="top:40%; left:45%; animation-delay:0s;"></div>
+    <div class="orbit" style="top:35%; left:55%; animation-delay:0.4s;"></div>
+    <div class="orbit" style="top:50%; left:52%; animation-delay:0.8s;"></div>
+
+    <!-- Music player -->
+    <div class="music-player">
+      <button class="play-pause-btn">⏵</button>
+    </div>
+  </div>
+
+  <!-- Audio -->
+  <audio id="heartbeat" src="IMAGES/heartbeat.mp3" preload="auto"></audio>
+  <audio id="bg-music" loop preload="auto">
+    <source src="IMAGES/bg-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
