@@ -152,7 +152,7 @@ body {
 
 /* === EFEITOS HOVER === */
 .room-element:hover {
-  transform: scale(1.03);
+  transform: scale(1.01);
   filter: drop-shadow(0 0 20px rgba(255, 91, 184, 0.8)) brightness(1.1);
   z-index: 999;
 }
@@ -188,4 +188,5 @@ body {
   background: rgba(255, 91, 184, 0.2);
   transform: scale(1.1);
   box-shadow: 0 0 25px rgba(255, 91, 184, 0.8);
+
 }
