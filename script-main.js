@@ -339,7 +339,7 @@ function createVideoItem(number) {
         video.src = testSrc;
         video.muted = true;
         video.loop = true;
-        video.autoplay = true;
+        video.autoplay = window.innerWidth > 768;
         video.playsinline = true;
         video.style.width = '100%';
         video.style.height = '100%';
@@ -349,7 +349,10 @@ function createVideoItem(number) {
         video.onloadeddata = function() {
           finalSrc = testSrc;
           video.style.display = 'block';
-          video.play().catch(e => console.log('Auto-play blocked:', e));
+         // No mobile, não toca vídeo automaticamente
+if (window.innerWidth > 768) {
+  video.play().catch(e => console.log('Auto-play blocked:', e));
+}
           
           currentMediaList.push({
             src: finalSrc,
@@ -603,4 +606,5 @@ function initializeHoverEffects() {
     });
   });
 }
+
 
