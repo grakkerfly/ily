@@ -13,7 +13,6 @@
   box-sizing: border-box;
 }
 
-
 body {
   background: radial-gradient(circle at center, #0b0710, #050307);
   height: 100vh;
@@ -256,5 +255,4 @@ body.glitch-effect {
     height: 45px;
     font-size: 18px;
   }
-
 }
