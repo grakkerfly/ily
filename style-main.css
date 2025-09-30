@@ -570,12 +570,22 @@ body {
     width: 95%;
     height: 90%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
   }
   
   .gallery-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;  /* ↑ ESPAÇO AUMENTADO */
+    gap: 20px;
     max-height: 65vh;
+    grid-auto-rows: minmax(100px, 1fr); /* ← CORREÇÃO DO ENCAVALAMENTO */
+    align-items: start;
+  }
+  
+  .gallery-item {
+    aspect-ratio: 1;
+    height: auto;
+    min-height: 0; /* ← IMPORTANTE: PERMITE REDIMENSIONAR */
   }
   
   .gallery-tabs {
@@ -610,7 +620,15 @@ body {
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;  /* ↑ ESPAÇO AUMENTADO */
+    gap: 15px;
+    grid-auto-rows: minmax(100px, 1fr); /* ← MESMA CORREÇÃO AQUI */
+    align-items: start;
+  }
+  
+  .gallery-item {
+    aspect-ratio: 1;
+    height: auto;
+    min-height: 0;
   }
 
   .viewer-content {
@@ -619,4 +637,3 @@ body {
     padding: 20px 10px;
   }
 }
-
