@@ -533,51 +533,49 @@ body {
   }
 }
 
-/* === CELULAR - BG HORIZONTAL CENTRALIZADO + GALERIA === */
+/* === CELULAR - CORREÇÃO DOS 3 BUGS === */
 @media (max-width: 768px) {
-  /* FUNDO PRETO PARA AS BARRAS */
+  /* BUG 1: Elementos em posição errada */
   body {
-    background: #000 !important;
+    background: #000;
     overflow: hidden;
     position: fixed;
     width: 100vw;
     height: 100vh;
   }
   
-/* BG CENTRALIZADO VERTICALMENTE - MOSTRA IMAGEM INTEIRA */
-.parallax-bg {
-  position: fixed;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: auto;
-  min-height: 100vh;
-  transform: translateY(-50%);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url('IMAGES/bg-main.png') !important;
-  z-index: -1;
-}
+  .parallax-bg {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    transform: translateY(-50%);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
   
-/* ELEMENTOS AJUSTADOS PARA O BG CENTRALIZADO */
-.computer {
-  width: 28%;
-  left: 8%;
-  top: 46%;
-}
+  /* POSIÇÕES CORRETAS DOS ELEMENTOS */
+  .computer {
+    width: 28%;
+    left: 8%;
+    top: 46%;
+  }
 
-.heart {
-  width: 25%;
-  left: 38%;
-  top: 38%;
-}
+  .heart {
+    width: 25%;
+    left: 38%;
+    top: 38%;
+  }
 
-.frame {
-  width: 25%;
-  left: 67%;
-  top: 40%;
-}
+  .frame {
+    width: 25%;
+    left: 67%;
+    top: 40%;
+  }
   
   .hover-text {
     font-size: 14px;
@@ -588,24 +586,24 @@ body {
     right: 20px;
   }
 
-  /* GALERIA COMPACTA */
+  /* BUG 2: Memes encavalados - GALERIA COMPACTA */
   .gallery-modal {
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
   
   .gallery-content {
-    width: 95% !important;
-    height: 90% !important;
-    transform: translate(-50%, -50%) !important;
+    width: 95%;
+    height: 90%;
+    transform: translate(-50%, -50%);
   }
   
   .gallery-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 10px;
-    max-height: 65vh !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-height: 65vh;
   }
 }
 
@@ -625,8 +623,16 @@ body {
     font-size: 18px;
   }
 
+  /* BUG 2: Memes encavalados - CELULAR PEQUENO */
   .gallery-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .viewer-content {
+    max-width: 98%;
+    max-height: 65vh;
+    padding: 20px 10px;
   }
 }
 
@@ -640,4 +646,3 @@ body {
     transform: translateY(-50%) !important;
   }
 }
-
