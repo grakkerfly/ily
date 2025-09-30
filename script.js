@@ -97,3 +97,5 @@ heartLink.addEventListener('click', function(e) {
     window.location.href = 'main.html';
   }, 800); // Time equal to animation duration
 });
+
+
