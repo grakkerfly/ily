@@ -27,11 +27,15 @@ const viewerImage = document.getElementById('viewerImage');
 const viewerVideo = document.getElementById('viewerVideo');
 const frameElement = document.getElementById('frame');
 const blurOverlay = document.getElementById('blurOverlay');
+const aboutModal = document.getElementById('aboutModal');
+const closeAbout = document.getElementById('closeAbout');
+const heartElement = document.getElementById('heart');
 
 // Estado da galeria
 let currentTab = 'memes';
 let currentCategory = 'character';
 let isGalleryOpen = false;
+let isAboutOpen = false;
 let currentMediaIndex = 0;
 let currentMediaList = [];
 
@@ -41,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeMusic();
   initializeParallax();
   initializeHoverEffects();
+  initializeAboutModal();
 });
 
 // === GALERIA ===
@@ -58,6 +63,8 @@ function initializeGallery() {
         closeMediaViewer();
       } else if (galleryModal.classList.contains('active')) {
         closeGalleryModal();
+      } else if (aboutModal.classList.contains('active')) {
+        closeAboutModal();
       }
     }
   });
@@ -349,10 +356,10 @@ function createVideoItem(number) {
         video.onloadeddata = function() {
           finalSrc = testSrc;
           video.style.display = 'block';
-         // No mobile, não toca vídeo automaticamente
-if (window.innerWidth > 768) {
-  video.play().catch(e => console.log('Auto-play blocked:', e));
-}
+          // No mobile, não toca vídeo automaticamente
+          if (window.innerWidth > 768) {
+            video.play().catch(e => console.log('Auto-play blocked:', e));
+          }
           
           currentMediaList.push({
             src: finalSrc,
@@ -571,7 +578,10 @@ function initializeMusic() {
 // === PARALLAX EM TODO O CONTEÚDO ===
 function initializeParallax() {
   document.addEventListener('mousemove', (e) => {
-    if (isGalleryOpen) return;
+    // Verificar se algum modal está aberto
+    if (isGalleryOpen || isAboutOpen || mediaViewer.classList.contains('active')) {
+      return; // Parar parallax se qualquer modal estiver aberto
+    }
     
     const x = (e.clientX / window.innerWidth - 0.5) * -18;
     const y = (e.clientY / window.innerHeight - 0.5) * -18;
@@ -596,7 +606,7 @@ function initializeHoverEffects() {
     });
     
     element.addEventListener('mouseleave', () => {
-      if (!galleryModal.classList.contains('active')) {
+      if (!galleryModal.classList.contains('active') && !aboutModal.classList.contains('active')) {
         blurOverlay.classList.remove('active');
       }
       
@@ -608,3 +618,43 @@ function initializeHoverEffects() {
 }
 
 
+
+
+
+
+
+
+
+
+// === ABOUT MODAL ===
+function initializeAboutModal() {
+  // Abrir modal ao clicar no coração
+  heartElement.addEventListener('click', openAboutModal);
+
+  // Fechar modal
+  closeAbout.addEventListener('click', closeAboutModal);
+
+  // Fechar clicando fora
+  aboutModal.addEventListener('click', (e) => {
+    if (e.target === aboutModal) {
+      closeAboutModal();
+    }
+  });
+
+  // Prevenir fechamento ao clicar no conteúdo
+  document.querySelector('.about-content').addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+}
+
+function openAboutModal() {
+  aboutModal.classList.add('active');
+  blurOverlay.classList.add('active');
+  isAboutOpen = true; // ← BLOQUEIA PARALLAX
+}
+
+function closeAboutModal() {
+  aboutModal.classList.remove('active');
+  blurOverlay.classList.remove('active');
+  isAboutOpen = false; // ← LIBERA PARALLAX
+}
