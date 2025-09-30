@@ -534,19 +534,19 @@ body {
   .computer {
     width: 28%;
     left: 8%;
-    top: 38%;
+    top: 40%;
   }
 
   .heart {
     width: 25%;
     left: 38%;
-    top: 30%;
+    top: 32%;
   }
 
   .frame {
     width: 25%;
     left: 67%;
-    top: 32%;
+    top: 34%;
   }
   
   .hover-text {
@@ -619,3 +619,4 @@ body {
     padding: 20px 10px;
   }
 }
+
