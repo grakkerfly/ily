@@ -123,20 +123,55 @@ body.glitch-effect {
   position: absolute;
   top: 75%;
   left: 50%;
-  transform: translateX(-50%);
-  color: #ff5bb8;
-  font-size: 30px;
-  text-shadow: 0 0 8px rgba(255,0,150,0.6);
-  animation: glitchText 1.5s infinite;
+  transform: translateX(-50%) scale(1.1);
+  color: white;
+  font-size: 32px;
+  font-family: 'PixelFont', 'Courier New', monospace;
+  text-shadow: 
+    0 0 10px #000,
+    0 0 20px #000, 
+    0 0 30px #000,
+    2px 0 #ff5bb8, 
+    -2px 0 #7b3cff;
+  animation: textGlitch 0.5s infinite;
   cursor: default;
   letter-spacing: 2px;
-  font-family: 'PixelFont', 'Courier New', monospace;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 1001;
 }
 
-@keyframes glitchText {
-  0% { text-shadow: 2px 0 #ff5bb8, -2px 0 #7b3cff; }
-  50% { text-shadow: -2px 0 #ff5bb8, 2px 0 #7b3cff; }
-  100% { text-shadow: 2px 0 #ff5bb8, -2px 0 #7b3cff; }
+@keyframes textGlitch {
+  0% { 
+    text-shadow: 
+      0 0 10px #000, 0 0 20px #000, 0 0 30px #000,
+      2px 0 #ff5bb8, -2px 0 #7b3cff;
+    transform: translateX(-50%) scale(1.1) translateX(0);
+  }
+  25% { 
+    text-shadow: 
+      0 0 10px #000, 0 0 20px #000, 0 0 30px #000,
+      -2px 0 #ff5bb8, 2px 0 #7b3cff;
+    transform: translateX(-50%) scale(1.1) translateX(2px);
+  }
+  50% { 
+    text-shadow: 
+      0 0 10px #000, 0 0 20px #000, 0 0 30px #000,
+      2px 0 #ff5bb8, -2px 0 #7b3cff;
+    transform: translateX(-50%) scale(1.1) translateX(-2px);
+  }
+  75% { 
+    text-shadow: 
+      0 0 10px #000, 0 0 20px #000, 0 0 30px #000,
+      -2px 0 #ff5bb8, 2px 0 #7b3cff;
+    transform: translateX(-50%) scale(1.1) translateX(1px);
+  }
+  100% { 
+    text-shadow: 
+      0 0 10px #000, 0 0 20px #000, 0 0 30px #000,
+      2px 0 #ff5bb8, -2px 0 #7b3cff;
+    transform: translateX(-50%) scale(1.1) translateX(0);
+  }
 }
 
 /* === MUSIC PLAYER === */
@@ -170,4 +205,54 @@ body.glitch-effect {
   background: rgba(255, 91, 184, 0.2);
   transform: scale(1.1);
   box-shadow: 0 0 25px rgba(255, 91, 184, 0.8);
+}
+
+
+
+
+
+/* === MOBILE === */
+@media (max-width: 768px) {
+  .heart-container {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .heart-glow {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .enter-text {
+    font-size: 24px;
+    top: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+  .heart-container {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .heart-glow {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .enter-text {
+    font-size: 20px;
+    top: 65%;
+  }
+  
+  .music-player {
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .play-pause-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+  }
 }

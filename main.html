@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>ILY Room</title>
   <link rel="stylesheet" href="style-main.css">
 </head>
@@ -10,23 +10,55 @@
   <div class="parallax-bg" id="parallaxBg"></div>
   
   <!-- Elementos interativos -->
-  <a href="how-to-buy.html" class="room-element computer" id="computer">
+  <div class="room-element computer" id="computer">
     <img src="IMAGES/computer-main.png" alt="Computer">
     <div class="hover-text">HOW TO BUY</div>
-  </a>
+  </div>
   
-  <a href="about-ily.html" class="room-element heart" id="heart">
+  <div class="room-element heart" id="heart">
     <img src="IMAGES/heart-main.png" alt="Heart Neon">
     <div class="hover-text">ABOUT ILY</div>
-  </a>
+  </div>
   
-  <a href="meme-gallery.html" class="room-element frame" id="frame">
+  <div class="room-element frame" id="frame">
     <img src="IMAGES/frame-main.png" alt="Frame">
     <div class="hover-text">MEME GALLERY</div>
-  </a>
+  </div>
 
   <!-- Overlay de desfoque -->
   <div class="blur-overlay" id="blurOverlay"></div>
+
+  <!-- Modal da Galeria -->
+  <div class="gallery-modal" id="galleryModal">
+    <div class="gallery-content">
+      <button class="close-gallery" id="closeGallery">✕</button>
+      
+      <div class="gallery-header">
+        <div class="gallery-tabs">
+          <button class="tab-btn active" data-tab="memes">MEMES</button>
+          <button class="tab-btn" data-tab="videos">VIDEOS</button>
+        </div>
+        
+        <div class="category-filters" id="categoryFilters">
+          <!-- Categorias serão geradas via JS -->
+        </div>
+      </div>
+      
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Memes serão gerados via JS -->
+      </div>
+      
+      <div class="media-viewer" id="mediaViewer">
+        <button class="close-viewer" id="closeViewer">✕</button>
+        <div class="viewer-content">
+          <img id="viewerImage" src="" alt="">
+          <video id="viewerVideo" controls>
+            Seu navegador não suporta o elemento de vídeo.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Music player -->
   <div class="music-player">
