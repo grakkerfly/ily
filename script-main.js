@@ -658,3 +658,51 @@ function closeAboutModal() {
   blurOverlay.classList.remove('active');
   isAboutOpen = false; // ← LIBERA PARALLAX
 }
+
+
+
+
+
+
+
+
+
+// === BUY MODAL (HOW TO BUY) ===
+const buyModal = document.getElementById('buyModal');
+const closeBuy = document.getElementById('closeBuy');
+const computerElement = document.getElementById('computer');
+
+// Abrir modal ao clicar no computador
+computerElement.addEventListener('click', () => {
+  buyModal.classList.add('active');
+  blurOverlay.classList.add('active');
+});
+
+// Fechar modal
+closeBuy.addEventListener('click', () => {
+  buyModal.classList.remove('active');
+  blurOverlay.classList.remove('active');
+});
+
+// Fechar clicando fora
+buyModal.addEventListener('click', (e) => {
+  if (e.target === buyModal) {
+    buyModal.classList.remove('active');
+    blurOverlay.classList.remove('active');
+  }
+});
+
+// Prevenir fechamento ao clicar dentro do conteúdo
+document.querySelector('.buy-content').addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+
+// Inicializar Jupiter plugin
+window.Jupiter.init({
+  displayMode: "integrated",
+  integratedTargetId: "jupiter-terminal",
+  formProps: {
+    initialInputMint: "So11111111111111111111111111111111111111112", // SOL
+    initialOutputMint: "Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups" // $ILY
+  },
+});
