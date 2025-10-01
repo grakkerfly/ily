@@ -1100,3 +1100,15 @@ body {
     right: 8px;
   }
 }
+
+
+
+/* Mostrar textos sempre visíveis no celular */
+@media (max-width: 768px) {
+  .hover-text {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    animation: textGlitch 0.5s infinite !important; /* mantém o efeito glitch */
+    pointer-events: none; /* garante que não atrapalha o clique nos objetos */
+  }
+}

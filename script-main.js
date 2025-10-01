@@ -672,10 +672,16 @@ const buyModal = document.getElementById('buyModal');
 const closeBuy = document.getElementById('closeBuy');
 const computerElement = document.getElementById('computer');
 
-// Abrir modal ao clicar no computador
+// Abrir modal ou redirecionar (desktop vs mobile)
 computerElement.addEventListener('click', () => {
-  buyModal.classList.add('active');
-  blurOverlay.classList.add('active');
+  if (window.innerWidth <= 768) {
+    // no celular: abre link direto na Jupiter
+    window.open("https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups", "_blank");
+  } else {
+    // no desktop: abre modal com plugin
+    buyModal.classList.add('active');
+    blurOverlay.classList.add('active');
+  }
 });
 
 // Fechar modal
