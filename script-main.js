@@ -1,21 +1,21 @@
-// === CONFIGURAÇÃO DA GALERIA ===
+// === GALLERY CONFIGURATION ===
 const galleryConfig = {
   memes: {
-    character: 55,    // meme1 até meme55
-    people: 20,       // people1 até people20  
-    projects: 36,     // project1 até project36
-    random: 26        // random1 até random26
+    character: 55,    // meme1 to meme55
+    people: 20,       // people1 to people20  
+    projects: 36,     // project1 to project36
+    random: 26        // random1 to random26
   },
-  vids: 20           // Mude para quantos vídeos/GIFs você tem (video1 até video10)
+  vids: 20           // Change to how many videos/GIFs you have (video1 to video10)
 };
 
-// Formatos suportados - AGORA GIF É VÍDEO!
+// Supported formats - NOW GIF IS A VIDEO!
 const supportedFormats = {
-  images: ['jpg', 'jpeg', 'png', 'webp'],  // GIF FOI REMOVIDO DAQUI
-  videos: ['mp4', 'webm', 'mov', 'gif']    // GIF AGORA É VÍDEO!
+  images: ['jpg', 'jpeg', 'png', 'webp'],  // GIF REMOVED FROM HERE
+  videos: ['mp4', 'webm', 'mov', 'gif']    // GIF IS NOW A VIDEO!
 };
 
-// === ELEMENTOS DO DOM ===
+// === DOM ELEMENTS ===
 const galleryModal = document.getElementById('galleryModal');
 const closeGallery = document.getElementById('closeGallery');
 const galleryGrid = document.getElementById('galleryGrid');
@@ -31,7 +31,7 @@ const aboutModal = document.getElementById('aboutModal');
 const closeAbout = document.getElementById('closeAbout');
 const heartElement = document.getElementById('heart');
 
-// Estado da galeria
+// Gallery state
 let currentTab = 'memes';
 let currentCategory = 'character';
 let isGalleryOpen = false;
@@ -39,7 +39,7 @@ let isAboutOpen = false;
 let currentMediaIndex = 0;
 let currentMediaList = [];
 
-// === INICIALIZAÇÃO ===
+// === INITIALIZATION ===
 document.addEventListener('DOMContentLoaded', () => {
   initializeGallery();
   initializeMusic();
@@ -48,15 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeAboutModal();
 });
 
-// === GALERIA ===
+// === GALLERY ===
 function initializeGallery() {
-  // Abrir galeria ao clicar no frame
+  // Open gallery when clicking the frame
   frameElement.addEventListener('click', openGallery);
   
-  // Fechar galeria
+  // Close gallery
   closeGallery.addEventListener('click', closeGalleryModal);
   
-  // Fechar com ESC
+  // Close with ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (mediaViewer.classList.contains('active')) {
@@ -69,7 +69,7 @@ function initializeGallery() {
     }
   });
   
-  // Trocar abas
+  // Switch tabs
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
@@ -77,25 +77,25 @@ function initializeGallery() {
     });
   });
   
-  // Fechar viewer
+  // Close viewer
   closeViewer.addEventListener('click', (e) => {
     e.stopPropagation();
     closeMediaViewer();
   });
   
-  // Fechar viewer clicando em qualquer lugar
+  // Close viewer by clicking anywhere
   mediaViewer.addEventListener('click', (e) => {
     if (e.target === mediaViewer) {
       closeMediaViewer();
     }
   });
   
-  // Prevenir que o click propague para elementos dentro do viewer
+  // Prevent click propagation inside viewer
   document.querySelector('.viewer-content').addEventListener('click', (e) => {
     e.stopPropagation();
   });
 
-  // Navegação por teclado no viewer
+  // Keyboard navigation in viewer
   document.addEventListener('keydown', handleViewerKeyboard);
 }
 
@@ -228,7 +228,7 @@ function createMemeItem(category, number) {
           index: currentMediaList.length
         });
         
-        // Adicionar evento de clique DEPOIS que a imagem carregou
+        // Add click event AFTER the image loads
         item.addEventListener('click', () => {
           const mediaIndex = currentMediaList.findIndex(media => media.src === finalSrc);
           if (mediaIndex !== -1) {
@@ -324,7 +324,7 @@ function createVideoItem(number) {
             index: currentMediaList.length
           });
           
-          // Adicionar evento de clique DEPOIS que o GIF carregou
+          // Add click event AFTER the GIF loads
           item.addEventListener('click', () => {
             const mediaIndex = currentMediaList.findIndex(media => media.src === finalSrc);
             if (mediaIndex !== -1) {
@@ -356,7 +356,7 @@ function createVideoItem(number) {
         video.onloadeddata = function() {
           finalSrc = testSrc;
           video.style.display = 'block';
-          // No mobile, não toca vídeo automaticamente
+          // On mobile, video does not autoplay
           if (window.innerWidth > 768) {
             video.play().catch(e => console.log('Auto-play blocked:', e));
           }
@@ -368,7 +368,7 @@ function createVideoItem(number) {
             index: currentMediaList.length
           });
           
-          // Adicionar evento de clique DEPOIS que o vídeo carregou
+          // Add click event AFTER the video loads
           item.addEventListener('click', () => {
             const mediaIndex = currentMediaList.findIndex(media => media.src === finalSrc);
             if (mediaIndex !== -1) {
@@ -425,7 +425,7 @@ function createVideoItem(number) {
       placeholder.style.color = 'white';
       placeholder.style.fontFamily = 'PixelFont';
       placeholder.style.fontSize = '12px';
-      placeholder.innerHTML = `VIDEO ${number}<br>❌ ERRO`;
+      placeholder.innerHTML = `VIDEO ${number}<br>❌ ERROR`;
       item.appendChild(placeholder);
     }
   }
@@ -443,7 +443,7 @@ function openMediaViewer(src, type, index) {
     viewerVideo.style.display = 'none';
     viewerVideo.pause();
     
-    // Permitir menu de contexto para imagens
+    // Allow context menu for images
     viewerImage.oncontextmenu = null;
     
   } else {
@@ -451,12 +451,12 @@ function openMediaViewer(src, type, index) {
     viewerVideo.style.display = 'block';
     viewerImage.style.display = 'none';
     
-    // Configurações para vídeos - CONTROLES HABILITADOS para menu de contexto
+    // Settings for videos - CONTROLS ENABLED for context menu
     viewerVideo.loop = true;
     viewerVideo.controls = true;
     viewerVideo.muted = false;
     
-    // Permitir menu de contexto para vídeos
+    // Allow context menu for videos
     viewerVideo.oncontextmenu = null;
     
     viewerVideo.play().catch(e => {
@@ -465,7 +465,7 @@ function openMediaViewer(src, type, index) {
     });
   }
   
-  // Adicionar setas de navegação se não existirem
+  // Add navigation arrows if they don't exist
   if (!document.querySelector('.viewer-nav')) {
     const viewerNav = document.createElement('div');
     viewerNav.className = 'viewer-nav';
@@ -503,7 +503,7 @@ function navigateMedia(direction) {
   
   const media = currentMediaList[currentMediaIndex];
   
-  // Atualizar viewer sem fechar completamente
+  // Update viewer without fully closing
   if (media.type === 'image') {
     viewerImage.src = media.src;
     viewerImage.style.display = 'block';
@@ -538,7 +538,7 @@ function closeMediaViewer() {
   mediaViewer.classList.remove('active');
   viewerVideo.pause();
   viewerVideo.currentTime = 0;
-  viewerVideo.controls = false; // Desabilitar controles quando fechar
+  viewerVideo.controls = false; // Disable controls when closing
 }
 
 // === MUSIC PLAYER ===
@@ -575,12 +575,12 @@ function initializeMusic() {
   });
 }
 
-// === PARALLAX EM TODO O CONTEÚDO ===
+// === PARALLAX ON ALL CONTENT ===
 function initializeParallax() {
   document.addEventListener('mousemove', (e) => {
-    // Verificar se algum modal está aberto
+    // Check if any modal is open
     if (isGalleryOpen || isAboutOpen || mediaViewer.classList.contains('active')) {
-      return; // Parar parallax se qualquer modal estiver aberto
+      return; // Stop parallax if any modal is open
     }
     
     const x = (e.clientX / window.innerWidth - 0.5) * -18;
@@ -590,7 +590,7 @@ function initializeParallax() {
   });
 }
 
-// === EFEITO HOVER AVANÇADO ===
+// === ADVANCED HOVER EFFECT ===
 function initializeHoverEffects() {
   const roomElements = document.querySelectorAll('.room-element');
 
@@ -617,31 +617,22 @@ function initializeHoverEffects() {
   });
 }
 
-
-
-
-
-
-
-
-
-
 // === ABOUT MODAL ===
 function initializeAboutModal() {
-  // Abrir modal ao clicar no coração
+  // Open modal when clicking the heart
   heartElement.addEventListener('click', openAboutModal);
 
-  // Fechar modal
+  // Close modal
   closeAbout.addEventListener('click', closeAboutModal);
 
-  // Fechar clicando fora
+  // Close when clicking outside
   aboutModal.addEventListener('click', (e) => {
     if (e.target === aboutModal) {
       closeAboutModal();
     }
   });
 
-  // Prevenir fechamento ao clicar no conteúdo
+  // Prevent closing when clicking inside content
   document.querySelector('.about-content').addEventListener('click', (e) => {
     e.stopPropagation();
   });
@@ -650,47 +641,39 @@ function initializeAboutModal() {
 function openAboutModal() {
   aboutModal.classList.add('active');
   blurOverlay.classList.add('active');
-  isAboutOpen = true; // ← BLOQUEIA PARALLAX
+  isAboutOpen = true; // ← BLOCKS PARALLAX
 }
 
 function closeAboutModal() {
   aboutModal.classList.remove('active');
   blurOverlay.classList.remove('active');
-  isAboutOpen = false; // ← LIBERA PARALLAX
+  isAboutOpen = false; // ← RELEASES PARALLAX
 }
-
-
-
-
-
-
-
-
 
 // === BUY MODAL (HOW TO BUY) ===
 const buyModal = document.getElementById('buyModal');
 const closeBuy = document.getElementById('closeBuy');
 const computerElement = document.getElementById('computer');
 
-// Abrir modal ou redirecionar (desktop vs mobile)
+// Open modal or redirect (desktop vs mobile)
 computerElement.addEventListener('click', () => {
   if (window.innerWidth <= 768) {
-    // no celular: abre link direto na Jupiter
+    // on mobile: open direct link to Jupiter
     window.open("https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups", "_blank");
   } else {
-    // no desktop: abre modal com plugin
+    // on desktop: open modal with plugin
     buyModal.classList.add('active');
     blurOverlay.classList.add('active');
   }
 });
 
-// Fechar modal
+// Close modal
 closeBuy.addEventListener('click', () => {
   buyModal.classList.remove('active');
   blurOverlay.classList.remove('active');
 });
 
-// Fechar clicando fora
+// Close by clicking outside
 buyModal.addEventListener('click', (e) => {
   if (e.target === buyModal) {
     buyModal.classList.remove('active');
@@ -698,12 +681,12 @@ buyModal.addEventListener('click', (e) => {
   }
 });
 
-// Prevenir fechamento ao clicar dentro do conteúdo
+// Prevent closing when clicking inside content
 document.querySelector('.buy-content').addEventListener('click', (e) => {
   e.stopPropagation();
 });
 
-// Inicializar Jupiter plugin
+// Initialize Jupiter plugin
 window.Jupiter.init({
   displayMode: "integrated",
   integratedTargetId: "jupiter-terminal",
