@@ -34,7 +34,7 @@ body {
   z-index: -1;
 }
 
-/* === ELEMENTOS DA SALA === */
+/* === room elements === */
 .room-element {
   position: absolute;
   display: block;
@@ -49,28 +49,28 @@ body {
   display: block;
 }
 
-/* Computador */
+/* Comp */
 .computer {
   width: 28%;
   left: 6%;
   top: 35%;
 }
 
-/* Coração */
+/* heart */
 .heart {
   width: 25%;
   left: 38%;
   top: 6%;
 }
 
-/* Quadro */
+/* frame */
 .frame {
   width: 25%;
   left: 67%;
   top: 10%;
 }
 
-/* === TEXTO HOVER === */
+/* === hover text === */
 .hover-text {
   position: absolute;
   top: 50%;
@@ -132,7 +132,7 @@ body {
   }
 }
 
-/* === OVERLAY DE DESFOQUE === */
+/* === blur overlay === */
 .blur-overlay {
   position: fixed;
   top: 0;
@@ -152,7 +152,7 @@ body {
   opacity: 1;
 }
 
-/* === EFEITOS HOVER === */
+/* === hover effects === */
 .room-element:hover {
   transform: scale(1.01);
   filter: drop-shadow(0 0 20px rgba(255, 91, 184, 0.8)) brightness(1.1);
@@ -192,7 +192,7 @@ body {
   box-shadow: 0 0 25px rgba(255, 91, 184, 0.8);
 }
 
-/* === GALERIA MODAL === */
+/* === gallery modal === */
 .gallery-modal {
   position: fixed;
   top: -50%;
@@ -252,7 +252,7 @@ body {
   box-shadow: 0 0 20px rgba(255, 91, 184, 0.6);
 }
 
-/* Header da Galeria */
+/* gallery header */
 .gallery-header {
   margin-bottom: 30px;
   text-align: center;
@@ -288,7 +288,7 @@ body {
   background: rgba(255, 91, 184, 0.3);
 }
 
-/* Filtros de Categoria */
+/* category filters */
 .category-filters {
   display: flex;
   justify-content: center;
@@ -317,7 +317,7 @@ body {
   background: rgba(123, 60, 255, 0.4);
 }
 
-/* Grade de Memes */
+/* meme grid */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -351,7 +351,7 @@ body {
   display: block;
 }
 
-/* === VIDEO ITEMS === */
+/* === video item === */
 .video-item video {
   transition: transform 0.3s ease;
 }
@@ -360,12 +360,12 @@ body {
   transform: scale(1.05);
 }
 
-/* Garantir que vídeos fiquem muted e em loop */
+/* muted loop */
 .gallery-item video {
   pointer-events: none;
 }
 
-/* Viewer de Mídia */
+/* media viewer */
 .media-viewer {
   position: fixed;
   top: 0;
@@ -438,7 +438,7 @@ body {
   max-height: 100%;
 }
 
-/* Scrollbar personalizada */
+/* custom scrollbar */
 .gallery-grid::-webkit-scrollbar {
   width: 8px;
 }
@@ -457,7 +457,7 @@ body {
   background: #ff3da5;
 }
 
-/* === SETAS DE NAVEGAÇÃO DO VIEWER === */
+/* === viewer nav === */
 .viewer-nav {
   position: absolute;
   top: 50%;
@@ -496,16 +496,16 @@ body {
   transform: scale(1);
 }
 
-/* Responsividade */
+/* responsivity */
 @media (max-width: 1200px) {
   .gallery-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-/* === VERSÃO CELULAR CORRIGIDA === */
+/* === cellphone === */
 @media (max-width: 768px) {
-  /* CONFIGURAÇÕES GERAIS */
+  /* config */
   body {
     background: #000;
     overflow: hidden;
@@ -515,7 +515,7 @@ body {
     transform: none !important;
   }
   
-  /* BG CENTRALIZADO */
+  /* bg */
   .parallax-bg {
     position: fixed;
     top: 50%;
@@ -530,7 +530,7 @@ body {
     z-index: -1;
   }
   
-  /* ELEMENTOS DA SALA - POSIÇÕES CORRETAS */
+  /* room elements */
   .computer {
     width: 28%;
     left: 8%;
@@ -558,7 +558,7 @@ body {
     right: 20px;
   }
 
-  /* GALERIA */
+  /* gallery */
   .gallery-modal {
     top: 0;
     left: 0;
@@ -578,14 +578,14 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     max-height: 65vh;
-    grid-auto-rows: minmax(100px, 1fr); /* ← CORREÇÃO DO ENCAVALAMENTO */
+    grid-auto-rows: minmax(100px, 1fr); 
     align-items: start;
   }
   
   .gallery-item {
     aspect-ratio: 1;
     height: auto;
-    min-height: 0; /* ← IMPORTANTE: PERMITE REDIMENSIONAR */
+    min-height: 0;
   }
   
   .gallery-tabs {
@@ -601,7 +601,7 @@ body {
   }
 }
 
-/* CELULAR PEQUENO */
+/* small phone */
 @media (max-width: 480px) {
   .hover-text {
     font-size: 12px;
@@ -621,7 +621,7 @@ body {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
-    grid-auto-rows: minmax(100px, 1fr); /* ← MESMA CORREÇÃO AQUI */
+    grid-auto-rows: minmax(100px, 1fr);
     align-items: start;
   }
   
@@ -663,17 +663,17 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 85%; /* ← CORRIGIDO: MESMA LARGURA DA GALERIA */
+  width: 85%; 
   height: 85%;
-  max-width: 1400px; /* ← CORRIGIDO: MESMO MAX-WIDTH DA GALERIA */
+  max-width: 1400px; 
   max-height: 90vh;
   background: rgba(0, 0, 0, 1);
   border: 2px solid #ff5bb8;
   border-radius: 15px;
   padding: 30px;
   box-shadow: 0 0 50px rgba(255, 91, 184, 0.5);
-  overflow-y: auto; /* ← CORRIGIDO: SCROLL VERTICAL APENAS */
-  z-index: 1004; /* ← CORRIGIDO: Z-INDEX CONSISTENTE */
+  overflow-y: auto; 
+  z-index: 1004; 
 }
 
 .close-about {
@@ -688,7 +688,7 @@ body {
   border-radius: 50%;
   font-size: 24px;
   cursor: pointer;
-  z-index: 1005; /* ← CORRIGIDO: Z-INDEX MAIOR QUE O CONTEÚDO */
+  z-index: 1005;
   transition: all 0.3s ease;
   font-family: 'Courier New', monospace;
 }
@@ -723,7 +723,7 @@ body {
   line-height: 1.6;
 }
 
-/* Imagem */
+/* Image */
 .about-image {
   text-align: center;
   margin-bottom: 80px;
@@ -740,7 +740,7 @@ body {
   cursor: pointer;
 }
 
-/* Seções */
+/* section */
 .about-section {
   margin-bottom: 40px;
   padding: 20px;
@@ -783,7 +783,7 @@ body {
   margin-right: 10px;
 }
 
-/* Botões */
+/* button */
 .about-buttons {
   display: flex;
   gap: 15px;
@@ -832,7 +832,7 @@ body {
   background: #ff3da5;
 }
 
-/* === RESPONSIVIDADE PARA ABOUT MODAL === */
+/* === about modal responsivity === */
 @media (max-width: 1200px) {
   .about-content {
     width: 90%;
@@ -969,7 +969,7 @@ body {
 
 
 
-/* === BUY MODAL (JUPITER PLUGIN) === */
+/* === buy modal jup === */
 .buy-modal {
   position: fixed;
   top: -50%;
@@ -1007,7 +1007,7 @@ body {
   justify-content: center;
 }
 
-/* Botão de fechar do Buy Modal */
+/* buy modal close button */
 .close-buy {
   position: absolute;
   top: 15px;
@@ -1031,7 +1031,7 @@ body {
   box-shadow: 0 0 20px rgba(255, 91, 184, 0.6);
 }
 
-/* Responsividade específica */
+/* specific responsivity */
 @media (max-width: 768px) {
   .buy-content {
     width: 95%;
@@ -1050,7 +1050,7 @@ body {
 
 
 
-/* === RESPONSIVIDADE PARA BUY MODAL === */
+/* === buy modal responsivity === */
 @media (max-width: 1200px) {
   .buy-content {
     width: 90%;
@@ -1103,12 +1103,13 @@ body {
 
 
 
-/* Mostrar textos sempre visíveis no celular */
+/* show text */
 @media (max-width: 768px) {
   .hover-text {
     opacity: 1 !important;
     transform: translate(-50%, -50%) scale(1) !important;
-    animation: textGlitch 0.5s infinite !important; /* mantém o efeito glitch */
-    pointer-events: none; /* garante que não atrapalha o clique nos objetos */
+    animation: textGlitch 0.5s infinite !important; 
+    pointer-events: none;
   }
 }
+
