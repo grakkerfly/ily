@@ -892,7 +892,6 @@ function initializeMusic() {
 // === PARALLAX ON ALL CONTENT ===
 function initializeParallax() {
   document.addEventListener('mousemove', (e) => {
-    // Check if any modal is open - ADICIONAR buyModal AQUI
     if (isGalleryOpen || isAboutOpen || isPfpOpen || mediaViewer.classList.contains('active') || buyModal.classList.contains('active')) {
       return; // Stop parallax if any modal is open
     }
@@ -1029,4 +1028,5 @@ function resetPfpTraits() {
   }
   
   renderPfp();
+
 }
