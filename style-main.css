@@ -1383,10 +1383,11 @@ body {
     font-size: 9px;
   }
   
-  .text-control-row {
-    padding: 3px 4px;
+.text-control-row {
+    padding: 6px 6px;
     min-width: 140px;
-  }
+    height: 20px !important;
+}
   
   .text-control-row input {
     font-size: 8px;
@@ -1408,9 +1409,9 @@ body {
 
   .text-control-row {
     font-size: 9px !important;
-    padding: 3px 4px !important;
+    padding: 10px 10px !important;
     min-width: 140px !important;
-    height: 20px !important;
+    height: 40px !important;
   }
   
   .text-control-row input {
@@ -1423,6 +1424,11 @@ body {
   .text-control-row span {
     font-size: 9px !important;
   }
+}
+
+.text-control-row input::placeholder {
+  font-size: 10px !important;
+  color: #888 !important;
 }
 
 @media (max-width: 1200px) {
@@ -1546,4 +1552,349 @@ body {
 
 .gallery-modal.active .gallery-content {
   display: block !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* === MOBILE VERSION - OPTIMIZED === */
+@media (max-width: 768px) {
+  /* === REMOVE PARALLAX NO MOBILE === */
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    transform: none !important;
+    position: relative;
+  }
+
+  .parallax-bg {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none !important;
+    background-image: url('IMAGES/bg-main-mobile.png') !important;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 1;
+  }
+
+  /* === LAYOUT BASE === */
+  .desktop-version { 
+    display: none !important; 
+  }
+  
+  .mobile-version { 
+    position: relative;
+    z-index: 2;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px 20px 60px;
+  }
+
+  /* === SCROLLBAR ROSA === */
+  ::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 91, 184, 0.1) !important;
+    border-radius: 3px !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #ff5bb8 !important;
+    border-radius: 3px !important;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff3da5 !important;
+  }
+
+  /* === GLITCH EFFECT PERMANENTE PARA TODOS OS TEXTOS === */
+  .mobile-title,
+  .mobile-heart .mobile-text,
+  .mobile-frame .mobile-text,
+  .mobile-buy,
+  .mobile-lab {
+    animation: textGlitchMobile 1.5s infinite !important;
+  }
+
+  @keyframes textGlitchMobile {
+    0% { 
+      text-shadow: 
+        0 0 10px rgba(255, 91, 184, 0.8),
+        2px 0 #ff5bb8, -2px 0 #7b3cff;
+      transform: translateX(0);
+    }
+    25% { 
+      text-shadow: 
+        0 0 10px rgba(255, 91, 184, 0.8),
+        -2px 0 #ff5bb8, 2px 0 #7b3cff;
+      transform: translateX(2px);
+    }
+    50% { 
+      text-shadow: 
+        0 0 10px rgba(255, 91, 184, 0.8),
+        2px 0 #ff5bb8, -2px 0 #7b3cff;
+      transform: translateX(-2px);
+    }
+    75% { 
+      text-shadow: 
+        0 0 10px rgba(255, 91, 184, 0.8),
+        -2px 0 #ff5bb8, 2px 0 #7b3cff;
+      transform: translateX(1px);
+    }
+    100% { 
+      text-shadow: 
+        0 0 10px rgba(255, 91, 184, 0.8),
+        2px 0 #ff5bb8, -2px 0 #7b3cff;
+      transform: translateX(0);
+    }
+  }
+
+  /* === TÍTULO === */
+  .mobile-title {
+    font-family: 'PixelFont', monospace;
+    font-size: 28px !important; /* Mesmo tamanho dos botões */
+    color: white !important;
+    text-align: center;
+    margin: 80px 0 -20px;
+    line-height: 1.2;
+  }
+
+  /* === HEART COM TEXTO NA FRENTE === */
+  .mobile-heart {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mobile-heart img {
+    width: 350px !important;
+    height: auto !important;
+  }
+
+.mobile-heart .mobile-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important; /* Centraliza perfeito */
+    font-family: 'PixelFont', monospace;
+    font-size: 26px !important;
+    color: white;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+  /* === REDES SOCIAIS === */
+  .mobile-social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0px;
+    margin: -10px 0 20px;
+  }
+
+  .mobile-social img {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* === BUY ILY === */
+  .mobile-buy {
+    font-family: 'PixelFont', monospace;
+    font-size: 22px !important; /* Tamanho padrão */
+    color: white;
+    cursor: pointer;
+    padding: 16px 35px;
+    border: 2px solid #ff5bb8;
+    border-radius: 12px;
+    background: rgba(255, 91, 184, 0.15);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-buy:active {
+    background: rgba(255, 91, 184, 0.3);
+    transform: scale(0.95);
+  }
+
+  /* === FRAME COM TEXTO NA FRENTE === */
+  .mobile-frame {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mobile-frame img {
+    width: 325px;
+    height: auto;
+    margin: 10px 0 10px;
+  }
+
+.mobile-frame .mobile-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important; /* Centraliza perfeito */
+    font-family: 'PixelFont', monospace;
+    font-size: 26px !important;
+    color: white;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+
+
+  /* === ILY LAB === */
+  .mobile-lab {
+    font-family: 'PixelFont', monospace;
+    font-size: 22px !important; /* Mesmo tamanho dos botões */
+    color: white;
+    cursor: pointer;
+    padding: 16px 35px;
+    border: 2px solid #ff5bb8;
+    border-radius: 12px;
+    background: rgba(255, 91, 184, 0.15);
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+  }
+
+  .mobile-lab:active {
+    background: rgba(255, 91, 184, 0.3);
+    transform: scale(0.95);
+  }
+
+/* === TEXTO DOS SELETORES - MOBILE === */
+.trait-row span {
+    font-size: 12px !important;
+}
+
+.text-control-row span {
+    font-size: 12px !important;
+}
+
+.text-control-row {
+    font-size: 12px !important;
+    padding: 10px 8px !important;
+}
+
+.text-control-row input {
+    font-size: 12px !important;
+    padding: 6px 8px !important;
+    height: 20px !important;
+}
+
+
+
+  /* === MODAIS MOBILE === */
+  
+  /* About Modal - Mais alto */
+  .about-content {
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    height: min(85vh, 700px) !important;
+    width: min(95vw, 400px) !important;
+  }
+
+
+
+/* PFP Editor - Layout Vertical CORRETO */
+.pfp-content {
+    width: min(95vw, 400px) !important;
+    height: min(100vh, 800px) !important;
+    padding: 40px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.pfp-header {
+    text-align: center;
+    margin-bottom: 10px !important;
+    flex-shrink: 0 !important;
+}
+
+.pfp-editor-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    flex: 1 !important;
+    align-items: center !important;
+    margin-top: -10px !important;
+}
+
+/* PFP PRIMEIRO */
+.pfp-canvas-container {
+    order: 1 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0 !important;
+}
+
+#pfpCanvas {
+    width: 300px !important;
+    height: 300px !important;
+    margin: 0 !important;
+    min-width: 300px !important;
+    min-height: 300px !important;
+    max-width: 300px !important;
+    max-height: 300px !important;
+}
+
+/* SELETORES DEPOIS */
+.pfp-controls {
+    order: 2 !important;
+    max-height: 225px !important;
+    width: 100% !important;
+    overflow-y: auto;
+    flex-shrink: 0 !important;
+}
+
+
+/* BOTÕES SEPARADOS */
+
+#pfp-buttons .pfp-button {
+    all: unset !important;
+    padding: 6px 30px !important;
+    font-size: 10px !important;
+    font-family: 'PixelFont', monospace !important;
+    background: #ff5bb8 !important;
+    color: white !important;
+    border-radius: 5px !important;
+    margin: 0 2px !important;
+    cursor: pointer !important;
+}
+
+
+}
+
+
+
+
+
+/* === DESKTOP - MANTÉM ORIGINAL === */
+@media (min-width: 769px) {
+  .mobile-version { display: none !important; }
+  .desktop-version { display: block !important; }
+  .parallax-bg { background-image: url('IMAGES/bg-main.png') !important; }
 }

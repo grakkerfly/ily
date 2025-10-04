@@ -1,13 +1,15 @@
 // === GALLERY CONFIGURATION ===
 const galleryConfig = {
   memes: {
-    character: 55,    // meme1 to meme55
-    people: 20,       // people1 to people20  
-    projects: 36,     // project1 to project36
-    random: 26        // random1 to random26
+    character1: 55,
+    people: 20,
+    projects: 36,
+    character2: 26,
   },
-  vids: 20           // Change to how many videos/GIFs you have (video1 to video20)
+  vids: 20
 };
+
+
 
 // Supported formats - NOW GIF IS A VIDEO!
 const supportedFormats = {
@@ -41,7 +43,7 @@ const downloadPfpBtn = document.getElementById('downloadPfpBtn');
 
 // Gallery state
 let currentTab = 'memes';
-let currentCategory = 'character';
+let currentCategory = 'character1';
 let isGalleryOpen = false;
 let isAboutOpen = false;
 let isPfpOpen = false;
@@ -677,10 +679,10 @@ function createMemeItem(category, number) {
 
 function getMemeFileName(category, number, format) {
   const prefixes = {
-    character: 'meme',
+    character1: 'meme',
     people: 'people', 
     projects: 'project',
-    random: 'random'
+    character2: 'random'
   };
   
   const prefix = prefixes[category] || 'meme';
@@ -1098,6 +1100,21 @@ window.Jupiter.init({
 });
 
 document.getElementById('iconCa').addEventListener('click', (e) => {
+  e.preventDefault();
+  navigator.clipboard.writeText("Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups");
+  alert("Contract address copied.");
+});
+
+
+
+// === MOBILE EVENT LISTENERS === 
+document.getElementById('mobileHeart').addEventListener('click', openAboutModal);
+document.getElementById('mobileBuy').addEventListener('click', () => {
+  window.open("https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups", "_blank");
+});
+document.getElementById('mobileFrame').addEventListener('click', openGallery);
+document.getElementById('mobileLab').addEventListener('click', openPfpEditor);
+document.getElementById('mobileCa').addEventListener('click', (e) => {
   e.preventDefault();
   navigator.clipboard.writeText("Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups");
   alert("Contract address copied.");

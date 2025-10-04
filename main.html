@@ -5,73 +5,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>ILY Room</title>
   <link rel="stylesheet" href="style-main.css">
-
-                                                     <!-- jup plugin -->
   <script src="https://plugin.jup.ag/plugin-v1.js"></script>
 </head>
 <body>
   <div class="parallax-bg" id="parallaxBg"></div>
   
-  <!-- interactive elements -->
-  <div class="room-element computer" id="computer">
-    <img src="IMAGES/computer-main.png" alt="Computer">
-    <div class="hover-text">BUY $ILY</div>
+  <!-- === DESKTOP VERSION === -->
+  <div class="desktop-version">
+    <!-- interactive elements -->
+    <div class="room-element computer" id="computer">
+      <img src="IMAGES/computer-main.png" alt="Computer">
+      <div class="hover-text">BUY $ILY</div>
+    </div>
+
+    <!-- icons -->
+    <a class="room-element icon-x" href="https://x.com/ILY4Solana" target="_blank">
+      <img src="IMAGES/icon-x.png" alt="X">
+    </a>
+    <a class="room-element icon-dexs" href="https://dexscreener.com/solana/95c8jc6fvhdtgcrcqrabr8vkdqjc5zkwfedcy7ygbnmi" target="_blank">
+      <img src="IMAGES/icon-dexs.png" alt="Dexscreener">
+    </a>
+    <a class="room-element icon-tg" href="https://t.me/spread_ily" target="_blank">
+      <img src="IMAGES/icon-tg.png" alt="Telegram">
+    </a>
+    <a class="room-element icon-ca" href="#" id="iconCa">
+      <img src="IMAGES/icon-ca.png" alt="Contract">
+    </a>
+
+    <!-- hero - ILY LAB -->
+    <div class="room-element hero" id="hero">
+      <img src="IMAGES/hero.png" alt="Hero">
+      <div class="hover-text">ILY LAB</div>
+    </div>
+
+    <div class="room-element heart" id="heart">
+      <img src="IMAGES/heart-main.png" alt="Heart Neon">
+      <div class="hover-text">ABOUT $ILY</div>
+    </div>
+    
+    <div class="room-element frame" id="frame">
+      <img src="IMAGES/frame-main.png" alt="Frame">
+      <div class="hover-text">MEME GALLERY</div>
+    </div>
   </div>
 
-                                                     <!-- icons -->
-
-  <!-- X -->
-  <a class="room-element icon-x" href="https://x.com/ILY4Solana" target="_blank">
-    <img src="IMAGES/icon-x.png" alt="X">
-  </a>
-  <!-- Dexs -->
-  <a class="room-element icon-dexs" href="https://dexscreener.com/solana/95c8jc6fvhdtgcrcqrabr8vkdqjc5zkwfedcy7ygbnmi" target="_blank">
-    <img src="IMAGES/icon-dexs.png" alt="Dexscreener">
-  </a>
-
-  <!-- Telegram -->
-  <a class="room-element icon-tg" href="https://t.me/spread_ily" target="_blank">
-    <img src="IMAGES/icon-tg.png" alt="Telegram">
-  </a>
-
-  <!-- CA -->
-  <a class="room-element icon-ca" href="#" id="iconCa">
-    <img src="IMAGES/icon-ca.png" alt="Contract">
-  </a>
-
-  <!-- hero - ILY LAB -->
-  <div class="room-element hero" id="hero">
-    <img src="IMAGES/hero.png" alt="Hero">
-    <div class="hover-text">ILY LAB</div>
-  </div>
-
-  <div class="room-element heart" id="heart">
-    <img src="IMAGES/heart-main.png" alt="Heart Neon">
-    <div class="hover-text">ABOUT $ILY</div>
-  </div>
-  
-  <div class="room-element frame" id="frame">
-    <img src="IMAGES/frame-main.png" alt="Frame">
-    <div class="hover-text">MEME GALLERY</div>
+  <!-- === MOBILE VERSION === -->
+  <div class="mobile-version">
+    <div class="mobile-title">THERE IS NO CAP, ILY</div>
+    
+    <div class="mobile-heart" id="mobileHeart">
+      <img src="IMAGES/heart-main.png" alt="Heart">
+      <span class="mobile-text">ABOUT $ILY</span>
+    </div>
+    
+    <div class="mobile-social-grid">
+      <a class="mobile-social" href="https://x.com/ILY4Solana" target="_blank">
+        <img src="IMAGES/icon-x.png" alt="X">
+      </a>
+      <a class="mobile-social" href="https://dexscreener.com/solana/95c8jc6fvhdtgcrcqrabr8vkdqjc5zkwfedcy7ygbnmi" target="_blank">
+        <img src="IMAGES/icon-dexs.png" alt="Dexscreener">
+      </a>
+      <a class="mobile-social" href="https://t.me/spread_ily" target="_blank">
+        <img src="IMAGES/icon-tg.png" alt="Telegram">
+      </a>
+      <a class="mobile-social" href="#" id="mobileCa">
+        <img src="IMAGES/icon-ca.png" alt="Contract">
+      </a>
+    </div>
+    
+    <div class="mobile-buy" id="mobileBuy">BUY $ILY</div>
+    
+    <div class="mobile-frame" id="mobileFrame">
+      <img src="IMAGES/frame-main.png" alt="Frame">
+      <span class="mobile-text">MEME GALLERY</span>
+    </div>
+    
+    <div class="mobile-lab" id="mobileLab">ILY LAB</div>
   </div>
 
   <!-- overlay blur -->
   <div class="blur-overlay" id="blurOverlay"></div>
 
-                                                     <!-- PFP Editor Modal -->
+  <!-- PFP Editor Modal -->
   <div class="pfp-modal" id="pfpModal">
     <div class="pfp-content">
       <button class="close-pfp" id="closePfp">✕</button>
-      
       <div class="pfp-header">
         <h2>ILY LAB ❤</h2>
       </div>
-
       <div class="pfp-editor-container">
-        <div id="pfpControls" class="pfp-controls">
-          <!-- Controles serão gerados pelo JavaScript -->
-        </div>
-        
+        <div id="pfpControls" class="pfp-controls"></div>
         <div class="pfp-canvas-container">
           <canvas id="pfpCanvas" width="800" height="800"></canvas>
         </div>
@@ -79,26 +102,18 @@
     </div>
   </div>
 
-                                                     <!-- gallery modal -->
+  <!-- gallery modal -->
   <div class="gallery-modal" id="galleryModal">
     <div class="gallery-content">
       <button class="close-gallery" id="closeGallery">✕</button>
-      
       <div class="gallery-header">
         <div class="gallery-tabs">
           <button class="tab-btn active" data-tab="memes">MEMES</button>
           <button class="tab-btn" data-tab="videos">VIDEOS</button>
         </div>
-        
-        <div class="category-filters" id="categoryFilters">
-          <!-- categories generated by js -->
-        </div>
+        <div class="category-filters" id="categoryFilters"></div>
       </div>
-      
-      <div class="gallery-grid" id="galleryGrid">
-        <!-- memes generated by js -->
-      </div>
-      
+      <div class="gallery-grid" id="galleryGrid"></div>
       <div class="media-viewer" id="mediaViewer">
         <button class="close-viewer" id="closeViewer">✕</button>
         <div class="viewer-content">
@@ -111,38 +126,29 @@
     </div>
   </div>
 
-                                                     <!-- about ily modal -->
+  <!-- about ily modal -->
   <div class="about-modal" id="aboutModal">
     <div class="about-content">
       <button class="close-about" id="closeAbout">✕</button>
-      
       <div class="about-header">
         <h1>About $ILY</h1>
       </div>
-
       <div class="about-body">
-        <!-- img -->
         <div class="about-image">
           <a href="IMAGES/about/about1.png" target="_blank">
             <img src="IMAGES/about/about1.png" alt="About ILY">
           </a>
         </div>
-
-        <!-- section 1 -->
         <div class="about-section">
           <h2>What is $ILY?</h2>
           <p>$ILY stands for I Love You. But it's more than words, and more than a token. It is a cultural movement on Solana - a reminder that in a world of noise, division, and speculation, connection and love remain the most powerful forces</p>
           <p>Born in the Jupiverse, $ILY began as a simple experiment and quickly evolved into a living doctrine. At its core is a timeless message: There is no cap, ILY. Not on love, not on creativity, not on what we can build together</p>
         </div>
-
-        <!-- section 1.1 -->
         <div class="about-section">
           <h2>Our Lore</h2>
           <p>The lore of $ILY is deeply inspired by the internet's most radical subcultures - particularly the philosophy that emerged from Remilia and Milady. This spirit embraces pseudonymity, fearless experimentation, and radical thought. It stood for free speech, critical thinking, and a refusal to conform to the aesthetics of mediocrity</p>
           <p>We channel that same ethos through "There is no cap, ILY." Love here is not sentimental - it is revolutionary. It is the force that dissolves egos, heals fractures, and unites strangers into believers. $ILY is about experimenting without fear, using love as a weapon, and proving how powerful a network of souls can be when bound by three words: I Love You</p>
         </div>
-
-        <!-- section 2 -->
         <div class="about-section">
           <h2>Why $ILY?</h2>
           <p><strong>There is no cap</strong> - Not just on market cap, but on meaning, imagination, and love</p>
@@ -150,8 +156,6 @@
           <p><strong>Cultural Currency</strong> - $ILY turns affection into signal - the emotional layer of the internet, tokenized</p>
           <p><strong>Communal Power</strong> - Every transfer, every meme, every act of kindness becomes fuel for collective growth</p>
         </div>
-
-        <!-- section 3 -->
         <div class="about-section">
           <h2>What $ILY Represents</h2>
           <p>$$ILY is not just a memecoin. It is:</p>
@@ -162,14 +166,10 @@
             <li>A path to transcendence, where egos dissolve and collective creation takes over</li>
           </ul>
         </div>
-
-        <!-- section 4 -->
         <div class="about-section">
           <h2>The Message is simple</h2>
           <p>People don't just want bags - they want to feel seen, felt, and loved. $ILY reminds us that in an age of fleeting trends, only love endures</p>
         </div>
-
-        <!-- section 5 -->
         <div class="about-section">
           <h2>What's Next?</h2>
           <p>The experiment continues. $ILY will keep expanding - through memes, art, IRL actions, and endless experiments in culture. The network grows stronger as each person dares to say it, send it, and spread it</p>
@@ -180,10 +180,7 @@
     </div>
   </div>
 
-  
-
-
-                                                     <!-- how to buy modal -->
+  <!-- how to buy modal -->
   <div class="buy-modal" id="buyModal">
     <div class="buy-content">
       <button class="close-buy" id="closeBuy">✕</button>
@@ -203,5 +200,4 @@
   
   <script src="script-main.js"></script>
 </body>
-
 </html>
