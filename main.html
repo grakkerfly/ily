@@ -6,18 +6,45 @@
   <title>ILY Room</title>
   <link rel="stylesheet" href="style-main.css">
 
-  <!-- jup plugin -->
+                                                     <!-- jup plugin -->
   <script src="https://plugin.jup.ag/plugin-v1.js"></script>
 </head>
 <body>
   <div class="parallax-bg" id="parallaxBg"></div>
   
-  <!-- interative elements -->
+  <!-- interactive elements -->
   <div class="room-element computer" id="computer">
     <img src="IMAGES/computer-main.png" alt="Computer">
     <div class="hover-text">BUY $ILY</div>
   </div>
-  
+
+                                                     <!-- icons -->
+
+  <!-- X -->
+  <a class="room-element icon-x" href="https://x.com/ILY4Solana" target="_blank">
+    <img src="IMAGES/icon-x.png" alt="X">
+  </a>
+  <!-- Dexs -->
+  <a class="room-element icon-dexs" href="https://dexscreener.com/solana/95c8jc6fvhdtgcrcqrabr8vkdqjc5zkwfedcy7ygbnmi" target="_blank">
+    <img src="IMAGES/icon-dexs.png" alt="Dexscreener">
+  </a>
+
+  <!-- Telegram -->
+  <a class="room-element icon-tg" href="https://t.me/spread_ily" target="_blank">
+    <img src="IMAGES/icon-tg.png" alt="Telegram">
+  </a>
+
+  <!-- CA -->
+  <a class="room-element icon-ca" href="#" id="iconCa">
+    <img src="IMAGES/icon-ca.png" alt="Contract">
+  </a>
+
+  <!-- hero - ILY LAB -->
+  <div class="room-element hero" id="hero">
+    <img src="IMAGES/hero.png" alt="Hero">
+    <div class="hover-text">ILY LAB</div>
+  </div>
+
   <div class="room-element heart" id="heart">
     <img src="IMAGES/heart-main.png" alt="Heart Neon">
     <div class="hover-text">ABOUT $ILY</div>
@@ -31,7 +58,28 @@
   <!-- overlay blur -->
   <div class="blur-overlay" id="blurOverlay"></div>
 
-  <!-- gallery modal -->
+                                                     <!-- PFP Editor Modal -->
+  <div class="pfp-modal" id="pfpModal">
+    <div class="pfp-content">
+      <button class="close-pfp" id="closePfp">✕</button>
+      
+      <div class="pfp-header">
+        <h2>ILY LAB ❤</h2>
+      </div>
+
+      <div class="pfp-editor-container">
+        <div id="pfpControls" class="pfp-controls">
+          <!-- Controles serão gerados pelo JavaScript -->
+        </div>
+        
+        <div class="pfp-canvas-container">
+          <canvas id="pfpCanvas" width="800" height="800"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+                                                     <!-- gallery modal -->
   <div class="gallery-modal" id="galleryModal">
     <div class="gallery-content">
       <button class="close-gallery" id="closeGallery">✕</button>
@@ -63,7 +111,7 @@
     </div>
   </div>
 
-  <!-- about ily modal -->
+                                                     <!-- about ily modal -->
   <div class="about-modal" id="aboutModal">
     <div class="about-content">
       <button class="close-about" id="closeAbout">✕</button>
@@ -83,22 +131,22 @@
         <!-- section 1 -->
         <div class="about-section">
           <h2>What is $ILY?</h2>
-          <p>$ILY stands for I Love You. But it’s more than words, and more than a token. It is a cultural movement on Solana - a reminder that in a world of noise, division, and speculation, connection and love remain the most powerful forces</p>
+          <p>$ILY stands for I Love You. But it's more than words, and more than a token. It is a cultural movement on Solana - a reminder that in a world of noise, division, and speculation, connection and love remain the most powerful forces</p>
           <p>Born in the Jupiverse, $ILY began as a simple experiment and quickly evolved into a living doctrine. At its core is a timeless message: There is no cap, ILY. Not on love, not on creativity, not on what we can build together</p>
         </div>
 
         <!-- section 1.1 -->
         <div class="about-section">
           <h2>Our Lore</h2>
-          <p>The lore of $ILY is deeply inspired by the internet’s most radical subcultures - particularly the philosophy that emerged from Remilia and Milady. This spirit embraces pseudonymity, fearless experimentation, and radical thought. It stood for free speech, critical thinking, and a refusal to conform to the aesthetics of mediocrity</p>
-          <p>We channel that same ethos through “There is no cap, ILY.” Love here is not sentimental - it is revolutionary. It is the force that dissolves egos, heals fractures, and unites strangers into believers. $ILY is about experimenting without fear, using love as a weapon, and proving how powerful a network of souls can be when bound by three words: I Love You</p>
+          <p>The lore of $ILY is deeply inspired by the internet's most radical subcultures - particularly the philosophy that emerged from Remilia and Milady. This spirit embraces pseudonymity, fearless experimentation, and radical thought. It stood for free speech, critical thinking, and a refusal to conform to the aesthetics of mediocrity</p>
+          <p>We channel that same ethos through "There is no cap, ILY." Love here is not sentimental - it is revolutionary. It is the force that dissolves egos, heals fractures, and unites strangers into believers. $ILY is about experimenting without fear, using love as a weapon, and proving how powerful a network of souls can be when bound by three words: I Love You</p>
         </div>
 
         <!-- section 2 -->
         <div class="about-section">
           <h2>Why $ILY?</h2>
           <p><strong>There is no cap</strong> - Not just on market cap, but on meaning, imagination, and love</p>
-          <p><strong>Universal Language</strong> - “I love you” transcends borders, egos, and barriers. It is instantly understood</p>
+          <p><strong>Universal Language</strong> - "I love you" transcends borders, egos, and barriers. It is instantly understood</p>
           <p><strong>Cultural Currency</strong> - $ILY turns affection into signal - the emotional layer of the internet, tokenized</p>
           <p><strong>Communal Power</strong> - Every transfer, every meme, every act of kindness becomes fuel for collective growth</p>
         </div>
@@ -109,7 +157,7 @@
           <p>$$ILY is not just a memecoin. It is:</p>
           <ul>
             <li>A cultural experiment testing how far love and memes can spread</li>
-            <li>A social currency where every “ILY” is a thread in the network</li>
+            <li>A social currency where every "ILY" is a thread in the network</li>
             <li>A movement of radical kindness that treats love as the ultimate alpha</li>
             <li>A path to transcendence, where egos dissolve and collective creation takes over</li>
           </ul>
@@ -118,7 +166,7 @@
         <!-- section 4 -->
         <div class="about-section">
           <h2>The Message is simple</h2>
-          <p>People don’t just want bags - they want to feel seen, felt, and loved. $ILY reminds us that in an age of fleeting trends, only love endures</p>
+          <p>People don't just want bags - they want to feel seen, felt, and loved. $ILY reminds us that in an age of fleeting trends, only love endures</p>
         </div>
 
         <!-- section 5 -->
@@ -132,7 +180,10 @@
     </div>
   </div>
 
-  <!-- how to buy modal -->
+  
+
+
+                                                     <!-- how to buy modal -->
   <div class="buy-modal" id="buyModal">
     <div class="buy-content">
       <button class="close-buy" id="closeBuy">✕</button>
@@ -154,4 +205,3 @@
   <script src="script-main.js"></script>
 </body>
 </html>
-
