@@ -1,3 +1,21 @@
+/* === responsivity base === */
+:root {
+  /* Tamanhos base que vão se adaptar */
+  --modal-width: min(90vw, 1400px);
+  --modal-height: min(85vh, 900px);
+  --font-base: clamp(14px, 2vw, 20px);
+}
+
+/* 1200px padding adjust */
+@media (max-width: 1200px) {
+  .gallery-content,
+  .pfp-content,
+  .about-content,
+  .buy-content {
+    padding: 15px !important;
+  }
+}
+
 /* === CUSTOM FONTS === */
 @font-face {
   font-family: 'PixelFont';
@@ -323,7 +341,7 @@ body {
 .pfp-controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
   min-width: 200px;
   max-height: 600px;
   overflow-y: auto;
@@ -1142,4 +1160,390 @@ body {
     outline: none;
     border-color: #7b3cff;
     background: rgba(123, 60, 255, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////* === RESPONSIVITY === */
+
+
+
+
+
+/* === GALLERY MODAL RESPONSIVE === */
+@media (max-width: 1600px) {
+  .gallery-content {
+    width: min(50vw, 800px) !important;
+    height: min(50vh, 800px) !important;
+    padding: 15px !important;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+    gap: 10px !important;
+    max-height: calc(80vh - 120px) !important;
+  }
+  
+  .gallery-header {
+    margin-bottom: 20px !important;
+  }
+  
+  .tab-btn {
+    padding: 8px 20px !important;
+    font-size: 14px !important;
+  }
+  
+  .category-btn {
+    padding: 6px 15px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .gallery-content {
+    width: min(95vw, 800px) !important;
+    height: min(90vh, 600px) !important;
+    padding: 10px !important;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
+    gap: 8px !important;
+  }
+  
+  .tab-btn {
+    padding: 6px 15px !important;
+    font-size: 12px !important;
+  }
+  
+  .category-btn {
+    padding: 4px 12px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* === ABOUT MODAL RESPONSIVE === */
+@media (max-width: 1600px) {
+  .about-content {
+    width: min(90vw, 900px) !important;
+    height: min(85vh, 650px) !important;
+    padding: 20px !important;
+  }
+  
+  .about-body {
+    font-size: clamp(14px, 1.8vw, 20px) !important;
+  }
+  
+  .about-section {
+    margin-bottom: 25px !important;
+    padding: 15px !important;
+  }
+  
+  .about-section h2 {
+    font-size: 22px !important;
+  }
+  
+  .about-image img {
+    max-height: 60vh !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .about-content {
+    width: min(95vw, 700px) !important;
+    height: min(90vh, 500px) !important;
+    padding: 15px !important;
+  }
+  
+  .about-body {
+    font-size: clamp(12px, 1.6vw, 18px) !important;
+  }
+  
+  .about-section {
+    margin-bottom: 20px !important;
+    padding: 12px !important;
+  }
+  
+  .about-section h2 {
+    font-size: 18px !important;
+  }
+  
+  .about-section p, 
+  .about-section li {
+    font-size: 14px !important;
+  }
+  
+  .about-image img {
+    max-height: 30vh !important;
+  }
+}
+
+/* === BUY MODAL RESPONSIVE === */
+@media (max-width: 1600px) {
+  .buy-content {
+    width: min(70vw, 400px) !important;
+    height: min(70vh, 500px) !important;
+    padding: 15px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .buy-content {
+    width: min(75vw, 350px) !important;
+    height: min(75vh, 450px) !important;
+    padding: 10px !important;
+  }
+  
+  /* Tenta atingir o iframe do Jupiter */
+  .buy-content iframe,
+  #jupiter-terminal {
+    transform: scale(0.85) !important;
+    transform-origin: center center !important;
+  }
+}
+
+/* === MEDIA VIEWER RESPONSIVE === */
+@media (max-width: 1600px) {
+  .viewer-content {
+    max-width: 90% !important;
+    max-height: 75vh !important;
+    padding: 30px 15px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .viewer-content {
+    max-width: 95% !important;
+    max-height: 70vh !important;
+    padding: 20px 10px !important;
+  }
+  
+  .nav-arrow {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 20px !important;
+  }
+}
+
+#jupiter-terminal {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 30px 20px !important;
+}
+
+
+/* === PFP EDITOR RESPONSIVE === */
+@media (max-width: 1600px) {
+  .pfp-content {
+    width: min(80vw, 700px);
+    height: min(80vh, 700px);
+    padding: 10px;
+  }
+  
+  .pfp-editor-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin-top: 60px;
+    justify-content: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  #pfpCanvas {
+    width: min(60vw, 300px);
+    height: min(60vw, 300px);
+  }
+  
+  .pfp-controls {
+    min-width: min(150px, 20vw);
+    max-height: 50vh;
+    gap: 5px;
+    padding: 8px;
+  }
+  
+  .trait-row {
+    padding: 3px 5px;
+    min-width: 140px;
+  }
+  
+  .trait-row span,
+  .text-control-row {
+    font-size: 9px;
+  }
+  
+  .text-control-row {
+    padding: 3px 4px;
+    min-width: 140px;
+  }
+  
+  .text-control-row input {
+    font-size: 8px;
+    padding: 1px 3px;
+    width: 80px;
+  }
+
+  .pfp-button {
+    padding: 6px 10px !important;
+    font-size: 10px !important;
+    min-width: 80px !important;
+    margin: 2px !important;
+  }
+  
+  #pfp-buttons {
+    gap: 8px !important;
+    padding: 5px !important;
+  }
+
+  .text-control-row {
+    font-size: 9px !important;
+    padding: 3px 4px !important;
+    min-width: 140px !important;
+    height: 20px !important;
+  }
+  
+  .text-control-row input {
+    font-size: 8px !important;
+    padding: 1px 3px !important;
+    width: 80px !important;
+    height: 16px !important;
+  }
+  
+  .text-control-row span {
+    font-size: 9px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .pfp-content {
+    width: min(90vw, 450px);
+    height: min(100vh, 900px);
+  }
+  
+  #pfpCanvas {
+    width: min(25vw, 140px) !important;
+    height: min(25vw, 140px) !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+  }
+  
+  .pfp-controls {
+    min-width: min(100px, 15vw);
+    max-height: 30vh;
+    gap: 3px;
+    padding: 5px;
+  }
+  
+  .trait-row {
+    padding: 2px 4px;
+    min-width: 120px;
+  }
+  
+  .trait-row span,
+  .text-control-row {
+    font-size: 6px;
+  }
+  
+  .text-control-row {
+    padding: 2px 3px;
+    min-width: 120px;
+  }
+  
+  .text-control-row input {
+    font-size: 4px;
+    padding: 1px 2px;
+    width: 70px;
+  }
+
+  .pfp-button {
+    padding: 6px 10px !important;
+    font-size: 10px !important;
+    min-width: 80px !important;
+    margin: 2px !important;
+  }
+  
+  #pfp-buttons {
+    gap: 8px !important;
+    padding: 5px !important;
+  }
+
+  .text-control-row {
+    font-size: 8px !important;
+    padding: 2px 3px !important;
+    min-width: 120px !important;
+    height: 18px !important;
+  }
+  
+  .text-control-row input {
+    font-size: 4px !important;
+    padding: 1px 2px !important;
+    width: 70px !important;
+    height: 14px !important;
+  }
+  
+  .text-control-row span {
+    font-size: 4px !important;
+  }
+}
+
+
+/* === ISOLATION FIX === */
+@media (max-width: 1600px) {
+  /* Gallery ONLY */
+  .gallery-modal .gallery-content {
+    /* suas regras da gallery aqui */
+  }
+  
+  /* About ONLY */
+  .about-modal .about-content {
+    /* suas regras do about aqui */
+  }
+  
+  /* Buy ONLY */
+  .buy-modal .buy-content {
+    /* suas regras do buy aqui */
+  }
+  
+  /* PFP ONLY */
+  .pfp-modal .pfp-content {
+    /* suas regras do pfp aqui */
+  }
+}
+
+
+/* === DEBUG GALLERY FORCE === */
+@media (max-width: 1600px) {
+  .gallery-modal.active .gallery-content {
+    width: min(50vw, 1000px) !important;
+    height: min(50vh, 800px) !important;
+    max-width: min(85vw, 1000px) !important;
+    max-height: min(85vh, 800px) !important;
+    min-width: min(85vw, 1000px) !important;
+    min-height: min(85vh, 800px) !important;
+  }
+}
+
+
+/* === FIX MODAL CLOSE FLICKER === */
+.gallery-modal {
+  transition: opacity 0.2s ease !important;
+}
+
+.gallery-modal:not(.active) .gallery-content {
+  display: none !important;
+}
+
+.gallery-modal.active .gallery-content {
+  display: block !important;
 }
