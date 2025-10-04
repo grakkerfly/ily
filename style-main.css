@@ -388,9 +388,6 @@ body {
   box-shadow: 0 0 30px rgba(255, 91, 184, 0.3);
 }
 
-
-
-
 /* PFP Buttons */
 .pfp-actions {
   display: flex;
@@ -483,9 +480,6 @@ body {
 .pfp-controls::-webkit-scrollbar-thumb:hover {
   background: #ff3da5;
 }
-
-
-
 
 /* === gallery modal === */
 .gallery-modal {
@@ -1046,459 +1040,6 @@ body {
   box-shadow: 0 0 20px rgba(255, 91, 184, 0.6);
 }
 
-/* === PFP EDITOR RESPONSIVITY === */
-@media (max-width: 1200px) {
-  .pfp-editor-container {
-    flex-direction: column;
-    gap: 30px;
-  }
-  
-  .pfp-controls {
-    max-height: 200px;
-    min-width: 80%;
-    order: 2;
-  }
-  
-  #pfpCanvas {
-    width: 400px;
-    height: 400px;
-  }
-}
-
-@media (max-width: 768px) {
-  .pfp-modal {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .pfp-content {
-    width: 95%;
-    height: 90%;
-    max-width: none;
-    padding: 20px;
-    transform: translate(-50%, -50%);
-  }
-  
-  .pfp-header h2 {
-    font-size: 32px;
-  }
-  
-  .pfp-header p {
-    font-size: 16px;
-  }
-  
-  .pfp-editor-container {
-    gap: 20px;
-  }
-  
-  #pfpCanvas {
-    width: 300px;
-    height: 300px;
-  }
-  
-  .trait-row span {
-    font-size: 14px;
-  }
-  
-  .arrow {
-    font-size: 14px;
-    padding: 2px 4px;
-  }
-  
-  .pfp-button {
-    font-size: 16px;
-    padding: 10px 20px;
-  }
-  
-  .download-btn {
-    font-size: 18px;
-    padding: 12px 25px;
-  }
-}
-
-@media (max-width: 480px) {
-  .pfp-content {
-    width: 98%;
-    height: 92%;
-    padding: 15px;
-  }
-  
-  .pfp-header h2 {
-    font-size: 28px;
-  }
-  
-  .pfp-header p {
-    font-size: 14px;
-  }
-  
-  #pfpCanvas {
-    width: 250px;
-    height: 250px;
-  }
-  
-  .pfp-controls {
-    min-width: 90%;
-    max-height: 150px;
-  }
-  
-  .trait-row {
-    min-width: 150px;
-    padding: 6px 8px;
-  }
-  
-  .trait-row span {
-    font-size: 12px;
-  }
-  
-  .arrow {
-    font-size: 14px;
-    padding: 2px 4px;
-  }
-  
-  .pfp-actions {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-  
-  .pfp-button {
-    width: 100%;
-    max-width: 200px;
-  }
-  
-  .close-pfp {
-    width: 35px;
-    height: 35px;
-    font-size: 16px;
-    top: 10px;
-    right: 10px;
-  }
-}
-
-/* === gallery modal responsivity === */
-@media (max-width: 1200px) {
-  .gallery-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* === cellphone === */
-@media (max-width: 768px) {
-  /* config */
-  body {
-    background: #000;
-    overflow: hidden;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    transform: none !important;
-  }
-  
-  /* bg */
-  .parallax-bg {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: auto;
-    min-height: 100vh;
-    transform: translateY(-50%) !important;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-  }
-  
-  /* room elements */
-  .computer {
-    width: 28%;
-    left: 8%;
-    top: 40.5%;
-  }
-
-  .heart {
-    width: 25%;
-    left: 38%;
-    top: 32%;
-  }
-
-  .frame {
-    width: 25%;
-    left: 67%;
-    top: 34%;
-  }
-  
-  .hover-text {
-    font-size: 14px;
-  }
-  
-  .music-player {
-    bottom: 20px;
-    right: 20px;
-  }
-
-  /* gallery */
-  .gallery-modal {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .gallery-content {
-    width: 95%;
-    height: 90%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .gallery-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    max-height: 65vh;
-    grid-auto-rows: minmax(100px, 1fr); 
-    align-items: start;
-  }
-  
-  .gallery-item {
-    aspect-ratio: 1;
-    height: auto;
-    min-height: 0;
-  }
-  
-  .gallery-tabs {
-    flex-direction: column;
-    width: 200px;
-    margin: 0 auto 20px;
-  }
-
-  .viewer-content {
-    max-width: 95%;
-    max-height: 70vh;
-    padding: 30px 15px;
-  }
-  
-  /* about modal mobile */
-  .about-modal {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .about-content {
-    width: 95%;
-    height: 90%;
-    max-width: none;
-    padding: 20px;
-    transform: translate(-50%, -50%);
-  }
-  
-  .about-header h1 {
-    font-size: 32px;
-  }
-  
-  .about-body {
-    font-size: 18px;
-  }
-  
-  .about-section h2 {
-    font-size: 22px;
-  }
-  
-  .about-section p,
-  .about-section li {
-    font-size: 16px;
-  }
-  
-  .about-section strong {
-    font-size: 18px;
-  }
-  
-  .about-image {
-    margin-bottom: 40px;
-  }
-  
-  .about-image img {
-    max-width: 100%;
-    max-height: 300px;
-  }
-  
-  .about-buttons {
-    justify-content: center;
-    margin-top: 30px;
-  }
-  
-  .community-btn {
-    font-size: 18px;
-    min-width: 120px;
-    padding: 10px 20px;
-  }
-}
-
-/* small phone */
-@media (max-width: 480px) {
-  .hover-text {
-    font-size: 12px;
-  }
-  
-  .music-player {
-    bottom: 15px;
-    right: 15px;
-  }
-  
-  .play-pause-btn {
-    width: 45px;
-    height: 45px;
-    font-size: 18px;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    grid-auto-rows: minmax(100px, 1fr);
-    align-items: start;
-  }
-  
-  .gallery-item {
-    aspect-ratio: 1;
-    height: auto;
-    min-height: 0;
-  }
-
-  .viewer-content {
-    max-width: 98%;
-    max-height: 65vh;
-    padding: 20px 10px;
-  }
-  
-  /* about modal small phone */
-  .about-content {
-    width: 98%;
-    height: 92%;
-    padding: 15px;
-  }
-  
-  .about-header h1 {
-    font-size: 28px;
-  }
-  
-  .about-body {
-    font-size: 16px;
-  }
-  
-  .about-section {
-    padding: 15px;
-    margin-bottom: 25px;
-  }
-  
-  .about-section h2 {
-    font-size: 20px;
-  }
-  
-  .about-section p,
-  .about-section li {
-    font-size: 14px;
-  }
-  
-  .about-section strong {
-    font-size: 16px;
-  }
-  
-  .about-image {
-    margin-bottom: 30px;
-  }
-  
-  .about-image img {
-    max-height: 200px;
-  }
-  
-  .about-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .community-btn {
-    width: 100%;
-    max-width: 200px;
-    font-size: 16px;
-  }
-  
-  .close-about {
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
-    top: 10px;
-    right: 10px;
-  }
-  
-  /* buy modal small phone */
-  .buy-content {
-    width: 98%;
-    height: 92%;
-    padding: 15px;
-  }
-
-  .close-buy {
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
-    top: 8px;
-    right: 8px;
-  }
-}
-
-/* show text */
-@media (max-width: 768px) {
-  .hover-text {
-    opacity: 1 !important;
-    transform: translate(-50%, -50%) scale(1) !important;
-    animation: textGlitch 0.5s infinite !important; 
-    pointer-events: none;
-  }
-}
-
-/* === buy modal responsivity === */
-@media (max-width: 1200px) {
-  .buy-content {
-    width: 90%;
-    max-width: 600px;
-    height: auto;
-    min-height: 568px;
-  }
-}
-
-@media (max-width: 768px) {
-  .buy-modal {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .buy-content {
-    width: 95%;
-    height: 90%;
-    max-width: none;
-    padding: 20px;
-    transform: translate(-50%, -50%);
-  }
-
-  .close-buy {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
-    top: 10px;
-    right: 10px;
-  }
-}
-
-
-
-
 .pfp-controls {
   max-height: 600px;
   min-width: 280px;
@@ -1540,12 +1081,9 @@ body {
 #randomPfpBtn:hover { background: #ff5bb8; color: black; }
 #savePfpBtn:hover { background: #ff5bb8; color: black; }
 
-
 .trait-row span {
   text-transform: uppercase;
 }
-
-
 
 /* */
 .pfp-button {
@@ -1560,4 +1098,48 @@ body {
   border-radius: 10px !important;
   padding: 14px 50px !important;
   min-width: 120px !important;
+}
+
+
+
+/* === PFP TEXT CONTROLS === */
+.text-control-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 200px;
+    min-height: 35px;
+    padding: 16px 10px;
+    color: white;
+    font-family: 'PixelFont', 'Courier New', monospace;
+    font-size: 14x;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    border: 1px solid #7b3cff;
+    margin-bottom: 2px;
+}
+
+.text-control-row input {
+    flex: 1;
+    background: rgba(255, 91, 184, 0.1);
+    border: 1px solid #ff5bb8;
+    border-radius: 5px;
+    color: white;
+    font-family: 'PixelFont', 'Courier New', monospace;
+    font-size: 14px;
+    padding: 2px 2px;
+    text-align: center;
+    margin: 0 0px;
+}
+
+.text-control-row input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'PixelFont', 'Courier New', monospace;
+    font-size: 14px;
+}
+
+.text-control-row input:focus {
+    outline: none;
+    border-color: #7b3cff;
+    background: rgba(123, 60, 255, 0.2);
 }

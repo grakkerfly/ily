@@ -6,13 +6,13 @@ const galleryConfig = {
     projects: 36,     // project1 to project36
     random: 26        // random1 to random26
   },
-  vids: 20           // Change to how many videos/GIFs you have (video1 to video10)
+  vids: 20           // Change to how many videos/GIFs you have (video1 to video20)
 };
 
 // Supported formats - NOW GIF IS A VIDEO!
 const supportedFormats = {
-  images: ['jpg', 'jpeg', 'png', 'webp'],  // GIF REMOVED FROM HERE
-  videos: ['mp4', 'webm', 'mov', 'gif']    // GIF IS NOW A VIDEO!
+  images: ['jpg', 'jpeg', 'png', 'webp'],
+  videos: ['mp4', 'webm', 'mov', 'gif']
 };
 
 // === DOM ELEMENTS ===
@@ -75,7 +75,9 @@ let pfpState = {
   muzzle: 1,
   body: 1,
   bg: 1,
-  brows: 1
+  brows: 1,
+  textTop: "",
+  textBottom: ""
 };
 
 const pfpOptionalTraits = ["overlay", "accessories", "glasses"];
@@ -142,6 +144,11 @@ function initializePfpEditor() {
 function initializePfpControls() {
   pfpControls.innerHTML = '';
   
+  // Text controls FIRST
+  createTextControl("TEXT TOP", "textTop");
+  createTextControl("TEXT BOTTOM", "textBottom");
+  
+  // Then trait controls
   for (let trait in pfpConfig) {
     const row = document.createElement("div");
     row.classList.add("trait-row");
@@ -178,8 +185,6 @@ function initializePfpControls() {
   buttonsDiv.id = "pfp-buttons";
   pfpControls.appendChild(buttonsDiv);
 
-
-
   // Random button
   const randomBtn = document.createElement("button");
   randomBtn.id = "randomPfpBtn";
@@ -187,14 +192,12 @@ function initializePfpControls() {
   randomBtn.innerText = "RANDOM";
   buttonsDiv.appendChild(randomBtn);
 
-
   // Reset button
   const resetBtn = document.createElement("button");
   resetBtn.id = "resetPfpBtn";
   resetBtn.classList.add("pfp-button");
   resetBtn.innerText = "RESET";
   buttonsDiv.appendChild(resetBtn);
-
   
   // Download button
   const saveBtn = document.createElement("button");
@@ -203,10 +206,8 @@ function initializePfpControls() {
   saveBtn.innerText = "SAVE PFP";
   buttonsDiv.appendChild(saveBtn);
   
-  // ↓↓↓↓ EVENT LISTENER DO RESET  ↓↓↓↓
-  resetBtn.addEventListener("click", resetPfpTraits);
-  
   // Button events
+  resetBtn.addEventListener("click", resetPfpTraits);
   randomBtn.addEventListener("click", randomizePfpTraits);
   saveBtn.addEventListener("click", exportPfpImage);
   
@@ -214,6 +215,31 @@ function initializePfpControls() {
   pfpCanvas.addEventListener('contextmenu', (e) => {
     // Allow normal context menu
   });
+}
+
+function createTextControl(label, stateKey) {
+    const row = document.createElement("div");
+    row.classList.add("text-control-row");
+    
+    const span = document.createElement("span");
+    span.innerText = label;
+    span.style.fontSize = "12px";
+    span.style.minWidth = "80px";
+    
+    const input = document.createElement("input");
+    input.type = "text";
+    input.placeholder = "TYPE HERE";
+    input.maxLength = "30";
+    input.value = pfpState[stateKey];
+    
+    input.addEventListener('input', (e) => {
+        pfpState[stateKey] = e.target.value.toUpperCase();
+        renderPfp();
+    });
+    
+    row.appendChild(span);
+    row.appendChild(input);
+    pfpControls.appendChild(row);
 }
 
 function changePfpTrait(trait, step) {
@@ -243,7 +269,6 @@ function loadPfpDefaultImages() {
   defaultImages.forEach(key => {
     const [trait, num] = key.split('_');
     const img = new Image();
-    // CAMINHO CORRIGIDO: IMAGES/pfp editor/
     img.src = `IMAGES/pfp editor/${trait}/${num}.png`;
     img.onload = () => {
       pfpImageCache[key] = img;
@@ -273,7 +298,6 @@ function loadPfpRemainingImages() {
       const key = `${trait}_${i}`;
       if (!pfpImageCache[key]) {
         const img = new Image();
-        // CAMINHO CORRIGIDO: IMAGES/pfp editor/
         img.src = `IMAGES/pfp editor/${trait}/${i}.png`;
         img.onload = () => {
           pfpImageCache[key] = img;
@@ -290,6 +314,7 @@ function renderPfp() {
   const ctx = pfpCanvas.getContext("2d");
   ctx.clearRect(0, 0, pfpCanvas.width, pfpCanvas.height);
 
+  // Render image layers
   pfpRenderOrder.forEach(trait => {
     const num = pfpState[trait];
     if (num > 0 || (pfpOptionalTraits.includes(trait) && num === 0)) {
@@ -300,6 +325,47 @@ function renderPfp() {
       }
     }
   });
+
+  // Render text on top
+  renderTextOnCanvas(ctx, pfpCanvas);
+}
+
+function renderTextOnCanvas(ctx, canvas) {
+    const textTop = pfpState.textTop.toUpperCase();
+    const textBottom = pfpState.textBottom.toUpperCase();
+    
+    if (textTop) {
+        drawMemeText(ctx, textTop, 'top', canvas);
+    }
+    
+    if (textBottom) {
+        drawMemeText(ctx, textBottom, 'bottom', canvas);
+    }
+}
+
+function drawMemeText(ctx, text, position, canvas) {
+    // Meme style settings
+    ctx.font = 'normal 70px Impact, Arial Black, sans-serif';
+    ctx.letterSpacing = '0px';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    const y = position === 'top' ? 45 : canvas.height - 45;
+    const x = canvas.width / 2;
+    
+    // Strong black shadow (meme style)
+    ctx.fillStyle = 'black';
+    ctx.lineWidth = 20;
+    
+    // Draw shadow in multiple directions
+    ctx.fillText(text, x - 2, y - 2);
+    ctx.fillText(text, x + 2, y - 2);
+    ctx.fillText(text, x - 2, y + 2);
+    ctx.fillText(text, x + 2, y + 2);
+    
+    // White main text
+    ctx.fillStyle = 'white';
+    ctx.fillText(text, x, y);
 }
 
 function drawPfpTrait(img, trait, num, context, w, h) {
@@ -333,6 +399,7 @@ function exportPfpImage() {
 
   tempCtx.clearRect(0, 0, pfpExportSize, pfpExportSize);
 
+  // Render images
   pfpRenderOrder.forEach(trait => {
     const num = pfpState[trait];
     if (num > 0) {
@@ -348,6 +415,9 @@ function exportPfpImage() {
       }
     }
   });
+
+  // Render text in export too
+  renderTextOnCanvas(tempCtx, tempCanvas);
 
   const dataURL = tempCanvas.toDataURL("image/png");
   const link = document.createElement("a");
@@ -366,6 +436,37 @@ function closePfpEditor() {
   pfpModal.classList.remove('active');
   blurOverlay.classList.remove('active');
   isPfpOpen = false;
+}
+
+function resetPfpTraits() {
+  pfpState = {
+    overlay: 0,
+    accessories: 0,
+    glasses: 0,
+    eyes: 1,
+    earrings: 1,
+    shirt: 1,
+    hair: 1,
+    muzzle: 1,
+    body: 1,
+    bg: 1,
+    brows: 1,
+    textTop: "",
+    textBottom: ""
+  };
+  
+  // Reset text inputs
+  const textInputs = document.querySelectorAll('.text-control-row input');
+  textInputs[0].value = "";
+  textInputs[1].value = "";
+  
+  for (let trait in pfpState) {
+    if (pfpTraitLabels[trait]) {
+      pfpTraitLabels[trait].innerText = `${trait}: ${pfpState[trait] === 0 ? "none" : pfpState[trait]}`;
+    }
+  }
+  
+  renderPfp();
 }
 
 // === GALLERY FUNCTIONS ===
@@ -714,7 +815,6 @@ function createVideoItem(number) {
         playOverlay.style.alignItems = 'center';
         playOverlay.style.justifyContent = 'center';
         playOverlay.style.color = 'white';
-        playOverlay.style.fontSize = '16px';
         playOverlay.style.opacity = '0.8';
         playOverlay.style.transition = 'all 0.3s ease';
         playOverlay.innerHTML = '▶';
@@ -1002,31 +1102,3 @@ document.getElementById('iconCa').addEventListener('click', (e) => {
   navigator.clipboard.writeText("Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups");
   alert("Contract address copied.");
 });
-
-
-
-function resetPfpTraits() {
-  pfpState = {
-    overlay: 0,
-    accessories: 0,
-    glasses: 0,
-    eyes: 1,
-    earrings: 1,
-    shirt: 1,
-    hair: 1,
-    muzzle: 1,
-    body: 1,
-    bg: 1,
-    brows: 1
-  };
-  
-
-  for (let trait in pfpState) {
-    if (pfpTraitLabels[trait]) {
-      pfpTraitLabels[trait].innerText = `${trait}: ${pfpState[trait] === 0 ? "none" : pfpState[trait]}`;
-    }
-  }
-  
-  renderPfp();
-
-}
