@@ -1,20 +1,18 @@
 // === GALLERY CONFIGURATION ===
 const galleryConfig = {
   memes: {
-    character1: 55,
-    people: 20,
-    projects: 36,
-    character2: 26,
+    character: 55,    // meme1 to meme55
+    people: 20,       // people1 to people20  
+    projects: 36,     // project1 to project36
+    random: 26        // random1 to random26
   },
-  vids: 20
+  vids: 20           // Change to how many videos/GIFs you have (video1 to video10)
 };
-
-
 
 // Supported formats - NOW GIF IS A VIDEO!
 const supportedFormats = {
-  images: ['jpg', 'jpeg', 'png', 'webp'],
-  videos: ['mp4', 'webm', 'mov', 'gif']
+  images: ['jpg', 'jpeg', 'png', 'webp'],  // GIF REMOVED FROM HERE
+  videos: ['mp4', 'webm', 'mov', 'gif']    // GIF IS NOW A VIDEO!
 };
 
 // === DOM ELEMENTS ===
@@ -33,73 +31,13 @@ const aboutModal = document.getElementById('aboutModal');
 const closeAbout = document.getElementById('closeAbout');
 const heartElement = document.getElementById('heart');
 
-// PFP Editor Elements
-const pfpModal = document.getElementById('pfpModal');
-const closePfp = document.getElementById('closePfp');
-const heroElement = document.getElementById('hero');
-const pfpCanvas = document.getElementById('pfpCanvas');
-const pfpControls = document.getElementById('pfpControls');
-const downloadPfpBtn = document.getElementById('downloadPfpBtn');
-
 // Gallery state
 let currentTab = 'memes';
-let currentCategory = 'character1';
+let currentCategory = 'character';
 let isGalleryOpen = false;
 let isAboutOpen = false;
-let isPfpOpen = false;
 let currentMediaIndex = 0;
 let currentMediaList = [];
-
-// === PFP EDITOR CONFIGURATION ===
-const pfpConfig = {
-  overlay: 10,
-  accessories: 6,
-  glasses: 9,
-  eyes: 8,
-  earrings: 7,
-  shirt: 12,
-  hair: 9,
-  brows: 1,
-  muzzle: 2,
-  body: 5,
-  bg: 27
-};
-
-// PFP Editor state
-let pfpState = {
-  overlay: 0,
-  accessories: 0,
-  glasses: 0,
-  eyes: 1,
-  earrings: 1,
-  shirt: 1,
-  hair: 1,
-  muzzle: 1,
-  body: 1,
-  bg: 1,
-  brows: 1,
-  textTop: "",
-  textBottom: ""
-};
-
-const pfpOptionalTraits = ["overlay", "accessories", "glasses"];
-const pfpRenderOrder = [
-  "bg",
-  "body",
-  "muzzle",
-  "brows",
-  "hair",
-  "shirt",
-  "earrings",
-  "eyes",
-  "glasses",
-  "accessories",
-  "overlay"
-];
-
-let pfpImageCache = {};
-const pfpExportSize = 1000;
-const pfpTraitLabels = {};
 
 // === INITIALIZATION ===
 document.addEventListener('DOMContentLoaded', () => {
@@ -108,384 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
   initializeParallax();
   initializeHoverEffects();
   initializeAboutModal();
-  initializePfpEditor();
 });
 
-// === PFP EDITOR ===
-function initializePfpEditor() {
-  // Open PFP Editor when clicking ILY LAB
-  heroElement.addEventListener('click', openPfpEditor);
-  
-  // Close PFP Editor
-  closePfp.addEventListener('click', closePfpEditor);
-  
-  // Close with ESC
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isPfpOpen) {
-      closePfpEditor();
-    }
-  });
-  
-  // Close when clicking outside
-  pfpModal.addEventListener('click', (e) => {
-    if (e.target === pfpModal) {
-      closePfpEditor();
-    }
-  });
-  
-  // Prevent closing when clicking inside content
-  document.querySelector('.pfp-content').addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-  
-  // Initialize PFP Editor controls
-  initializePfpControls();
-  loadPfpDefaultImages();
-}
-
-function initializePfpControls() {
-  pfpControls.innerHTML = '';
-  
-  // Text controls FIRST
-  createTextControl("TEXT TOP", "textTop");
-  createTextControl("TEXT BOTTOM", "textBottom");
-  
-  // Then trait controls
-  for (let trait in pfpConfig) {
-    const row = document.createElement("div");
-    row.classList.add("trait-row");
-    
-    const left = document.createElement("div");
-    left.classList.add("arrow");
-    left.innerText = "◀";
-    
-    const right = document.createElement("div");
-    right.classList.add("arrow");
-    right.innerText = "▶";
-    
-    const label = document.createElement("span");
-    label.innerText = `${trait.toUpperCase()}: ${pfpState[trait] === 0 ? "NONE" : pfpState[trait]}`;
-    pfpTraitLabels[trait] = label;
-    
-    row.appendChild(left);
-    row.appendChild(label);
-    row.appendChild(right);
-    pfpControls.appendChild(row);
-    
-    // Arrow events
-    left.addEventListener("click", () => {
-      changePfpTrait(trait, -1);
-    });
-    
-    right.addEventListener("click", () => {
-      changePfpTrait(trait, +1);
-    });
-  }
-  
-  // Create buttons container
-  const buttonsDiv = document.createElement("div");
-  buttonsDiv.id = "pfp-buttons";
-  pfpControls.appendChild(buttonsDiv);
-
-  // Random button
-  const randomBtn = document.createElement("button");
-  randomBtn.id = "randomPfpBtn";
-  randomBtn.classList.add("pfp-button");
-  randomBtn.innerText = "RANDOM";
-  buttonsDiv.appendChild(randomBtn);
-
-  // Reset button
-  const resetBtn = document.createElement("button");
-  resetBtn.id = "resetPfpBtn";
-  resetBtn.classList.add("pfp-button");
-  resetBtn.innerText = "RESET";
-  buttonsDiv.appendChild(resetBtn);
-  
-  // Download button
-  const saveBtn = document.createElement("button");
-  saveBtn.id = "savePfpBtn";
-  saveBtn.classList.add("pfp-button");
-  saveBtn.innerText = "SAVE PFP";
-  buttonsDiv.appendChild(saveBtn);
-  
-  // Button events
-  resetBtn.addEventListener("click", resetPfpTraits);
-  randomBtn.addEventListener("click", randomizePfpTraits);
-  saveBtn.addEventListener("click", exportPfpImage);
-  
-  // Enable context menu on canvas
-  pfpCanvas.addEventListener('contextmenu', (e) => {
-    // Allow normal context menu
-  });
-}
-
-function createTextControl(label, stateKey) {
-    const row = document.createElement("div");
-    row.classList.add("text-control-row");
-    
-    const span = document.createElement("span");
-    span.innerText = label;
-    span.style.fontSize = "12px";
-    span.style.minWidth = "80px";
-    
-    const input = document.createElement("input");
-    input.type = "text";
-    input.placeholder = "TYPE HERE";
-    input.maxLength = "30";
-    input.value = pfpState[stateKey];
-    
-    input.addEventListener('input', (e) => {
-        pfpState[stateKey] = e.target.value.toUpperCase();
-        renderPfp();
-    });
-    
-    row.appendChild(span);
-    row.appendChild(input);
-    pfpControls.appendChild(row);
-}
-
-function changePfpTrait(trait, step) {
-  if (pfpOptionalTraits.includes(trait)) {
-    pfpState[trait] = (pfpState[trait] + step + (pfpConfig[trait] + 1)) % (pfpConfig[trait] + 1);
-  } else {
-    pfpState[trait] = pfpState[trait] + step;
-    if (pfpState[trait] < 1) pfpState[trait] = pfpConfig[trait];
-    if (pfpState[trait] > pfpConfig[trait]) pfpState[trait] = 1;
-  }
-  pfpTraitLabels[trait].innerText = `${trait}: ${pfpState[trait] === 0 ? "none" : pfpState[trait]}`;
-  renderPfp();
-}
-
-function loadPfpDefaultImages() {
-  const defaultImages = [];
-  
-  pfpRenderOrder.forEach(trait => {
-    const num = pfpState[trait];
-    if (num > 0 || (pfpOptionalTraits.includes(trait) && num === 0)) {
-      defaultImages.push(`${trait}_${num}`);
-    }
-  });
-
-  let loaded = 0;
-  
-  defaultImages.forEach(key => {
-    const [trait, num] = key.split('_');
-    const img = new Image();
-    img.src = `IMAGES/pfp editor/${trait}/${num}.png`;
-    img.onload = () => {
-      pfpImageCache[key] = img;
-      loaded++;
-      if (loaded === defaultImages.length) {
-        renderPfp();
-        loadPfpRemainingImages();
-      }
-    };
-    img.onerror = () => {
-      console.warn(`⚠️ PFP image not found: IMAGES/pfp editor/${trait}/${num}.png`);
-      loaded++;
-      if (loaded === defaultImages.length) {
-        renderPfp();
-        loadPfpRemainingImages();
-      }
-    };
-  });
-}
-
-function loadPfpRemainingImages() {
-  for (let trait in pfpConfig) {
-    const max = pfpConfig[trait];
-    const start = pfpOptionalTraits.includes(trait) ? 0 : 1;
-    
-    for (let i = start; i <= max; i++) {
-      const key = `${trait}_${i}`;
-      if (!pfpImageCache[key]) {
-        const img = new Image();
-        img.src = `IMAGES/pfp editor/${trait}/${i}.png`;
-        img.onload = () => {
-          pfpImageCache[key] = img;
-        };
-        img.onerror = () => {
-          console.warn(`⚠️ PFP image not found: IMAGES/pfp editor/${trait}/${i}.png`);
-        };
-      }
-    }
-  }
-}
-
-function renderPfp() {
-  const ctx = pfpCanvas.getContext("2d");
-  ctx.clearRect(0, 0, pfpCanvas.width, pfpCanvas.height);
-
-  // Render image layers
-  pfpRenderOrder.forEach(trait => {
-    const num = pfpState[trait];
-    if (num > 0 || (pfpOptionalTraits.includes(trait) && num === 0)) {
-      const key = `${trait}_${num}`;
-      const img = pfpImageCache[key];
-      if (img) {
-        drawPfpTrait(img, trait, num, ctx, pfpCanvas.width, pfpCanvas.height);
-      }
-    }
-  });
-
-  // Render text on top
-  renderTextOnCanvas(ctx, pfpCanvas);
-}
-
-function renderTextOnCanvas(ctx, canvas) {
-    const textTop = pfpState.textTop.toUpperCase();
-    const textBottom = pfpState.textBottom.toUpperCase();
-    
-    if (textTop) {
-        drawMemeText(ctx, textTop, 'top', canvas);
-    }
-    
-    if (textBottom) {
-        drawMemeText(ctx, textBottom, 'bottom', canvas);
-    }
-}
-
-function drawMemeText(ctx, text, position, canvas) {
-    // Meme style settings
-    ctx.font = 'normal 70px Impact, Arial Black, sans-serif';
-    ctx.letterSpacing = '0px';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    
-    const y = position === 'top' ? 45 : canvas.height - 45;
-    const x = canvas.width / 2;
-    
-    // Strong black shadow (meme style)
-    ctx.fillStyle = 'black';
-    ctx.lineWidth = 20;
-    
-    // Draw shadow in multiple directions
-    ctx.fillText(text, x - 2, y - 2);
-    ctx.fillText(text, x + 2, y - 2);
-    ctx.fillText(text, x - 2, y + 2);
-    ctx.fillText(text, x + 2, y + 2);
-    
-    // White main text
-    ctx.fillStyle = 'white';
-    ctx.fillText(text, x, y);
-}
-
-function drawPfpTrait(img, trait, num, context, w, h) {
-  if (trait === "overlay" && num === 5) {
-    context.globalCompositeOperation = "color-dodge";
-  } else {
-    context.globalCompositeOperation = "source-over";
-  }
-  context.drawImage(img, 0, 0, w, h);
-}
-
-function randomizePfpTraits() {
-  for (let trait in pfpConfig) {
-    if (trait === "shirt") {
-      pfpState[trait] = Math.floor(Math.random() * (pfpConfig[trait] - 1)) + 2;
-    } else if (pfpOptionalTraits.includes(trait)) {
-      pfpState[trait] = Math.floor(Math.random() * (pfpConfig[trait] + 1));
-    } else {
-      pfpState[trait] = Math.floor(Math.random() * pfpConfig[trait]) + 1;
-    }
-    pfpTraitLabels[trait].innerText = `${trait}: ${pfpState[trait] === 0 ? "none" : pfpState[trait]}`;
-  }
-  renderPfp();
-}
-
-function exportPfpImage() {
-  const tempCanvas = document.createElement("canvas");
-  tempCanvas.width = pfpExportSize;
-  tempCanvas.height = pfpExportSize;
-  const tempCtx = tempCanvas.getContext("2d");
-
-  tempCtx.clearRect(0, 0, pfpExportSize, pfpExportSize);
-
-  // Render images
-  pfpRenderOrder.forEach(trait => {
-    const num = pfpState[trait];
-    if (num > 0) {
-      const key = `${trait}_${num}`;
-      const img = pfpImageCache[key];
-      if (img) {
-        if (trait === "overlay" && num === 5) {
-          tempCtx.globalCompositeOperation = "color-dodge";
-        } else {
-          tempCtx.globalCompositeOperation = "source-over";
-        }
-        tempCtx.drawImage(img, 0, 0, pfpExportSize, pfpExportSize);
-      }
-    }
-  });
-
-  // Render text in export too
-  renderTextOnCanvas(tempCtx, tempCanvas);
-
-  const dataURL = tempCanvas.toDataURL("image/png");
-  const link = document.createElement("a");
-  link.download = "ily-pfp.png";
-  link.href = dataURL;
-  link.click();
-}
-
-function openPfpEditor() {
-  pfpModal.classList.add('active');
-  blurOverlay.classList.add('active');
-  isPfpOpen = true;
-}
-
-function closePfpEditor() {
-  pfpModal.classList.remove('active');
-  blurOverlay.classList.remove('active');
-  isPfpOpen = false;
-}
-
-function resetPfpTraits() {
-  pfpState = {
-    overlay: 0,
-    accessories: 0,
-    glasses: 0,
-    eyes: 1,
-    earrings: 1,
-    shirt: 1,
-    hair: 1,
-    muzzle: 1,
-    body: 1,
-    bg: 1,
-    brows: 1,
-    textTop: "",
-    textBottom: ""
-  };
-  
-  // Reset text inputs
-  const textInputs = document.querySelectorAll('.text-control-row input');
-  textInputs[0].value = "";
-  textInputs[1].value = "";
-  
-  for (let trait in pfpState) {
-    if (pfpTraitLabels[trait]) {
-      pfpTraitLabels[trait].innerText = `${trait}: ${pfpState[trait] === 0 ? "none" : pfpState[trait]}`;
-    }
-  }
-  
-  renderPfp();
-}
-
-// === GALLERY FUNCTIONS ===
+// === GALLERY ===
 function initializeGallery() {
+  // Open gallery when clicking the frame
   frameElement.addEventListener('click', openGallery);
+  
+  // Close gallery
   closeGallery.addEventListener('click', closeGalleryModal);
   
-  galleryModal.addEventListener('click', (e) => {
-    if (e.target === galleryModal) {
-      closeGalleryModal();
-    }
-  });
-
-  document.querySelector('.gallery-content').addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-
+  // Close with ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (mediaViewer.classList.contains('active')) {
@@ -494,12 +65,11 @@ function initializeGallery() {
         closeGalleryModal();
       } else if (aboutModal.classList.contains('active')) {
         closeAboutModal();
-      } else if (pfpModal.classList.contains('active')) {
-        closePfpEditor();
       }
     }
   });
   
+  // Switch tabs
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.dataset.tab;
@@ -507,21 +77,25 @@ function initializeGallery() {
     });
   });
   
+  // Close viewer
   closeViewer.addEventListener('click', (e) => {
     e.stopPropagation();
     closeMediaViewer();
   });
   
+  // Close viewer by clicking anywhere
   mediaViewer.addEventListener('click', (e) => {
     if (e.target === mediaViewer) {
       closeMediaViewer();
     }
   });
   
+  // Prevent click propagation inside viewer
   document.querySelector('.viewer-content').addEventListener('click', (e) => {
     e.stopPropagation();
   });
 
+  // Keyboard navigation in viewer
   document.addEventListener('keydown', handleViewerKeyboard);
 }
 
@@ -654,6 +228,7 @@ function createMemeItem(category, number) {
           index: currentMediaList.length
         });
         
+        // Add click event AFTER the image loads
         item.addEventListener('click', () => {
           const mediaIndex = currentMediaList.findIndex(media => media.src === finalSrc);
           if (mediaIndex !== -1) {
@@ -679,10 +254,10 @@ function createMemeItem(category, number) {
 
 function getMemeFileName(category, number, format) {
   const prefixes = {
-    character1: 'meme',
+    character: 'meme',
     people: 'people', 
     projects: 'project',
-    character2: 'random'
+    random: 'random'
   };
   
   const prefix = prefixes[category] || 'meme';
@@ -749,6 +324,7 @@ function createVideoItem(number) {
             index: currentMediaList.length
           });
           
+          // Add click event AFTER the GIF loads
           item.addEventListener('click', () => {
             const mediaIndex = currentMediaList.findIndex(media => media.src === finalSrc);
             if (mediaIndex !== -1) {
@@ -780,6 +356,7 @@ function createVideoItem(number) {
         video.onloadeddata = function() {
           finalSrc = testSrc;
           video.style.display = 'block';
+          // On mobile, video does not autoplay
           if (window.innerWidth > 768) {
             video.play().catch(e => console.log('Auto-play blocked:', e));
           }
@@ -791,6 +368,7 @@ function createVideoItem(number) {
             index: currentMediaList.length
           });
           
+          // Add click event AFTER the video loads
           item.addEventListener('click', () => {
             const mediaIndex = currentMediaList.findIndex(media => media.src === finalSrc);
             if (mediaIndex !== -1) {
@@ -817,6 +395,7 @@ function createVideoItem(number) {
         playOverlay.style.alignItems = 'center';
         playOverlay.style.justifyContent = 'center';
         playOverlay.style.color = 'white';
+        playOverlay.style.fontSize = '16px';
         playOverlay.style.opacity = '0.8';
         playOverlay.style.transition = 'all 0.3s ease';
         playOverlay.innerHTML = '▶';
@@ -864,6 +443,7 @@ function openMediaViewer(src, type, index) {
     viewerVideo.style.display = 'none';
     viewerVideo.pause();
     
+    // Allow context menu for images
     viewerImage.oncontextmenu = null;
     
   } else {
@@ -871,10 +451,12 @@ function openMediaViewer(src, type, index) {
     viewerVideo.style.display = 'block';
     viewerImage.style.display = 'none';
     
+    // Settings for videos - CONTROLS ENABLED for context menu
     viewerVideo.loop = true;
     viewerVideo.controls = true;
     viewerVideo.muted = false;
     
+    // Allow context menu for videos
     viewerVideo.oncontextmenu = null;
     
     viewerVideo.play().catch(e => {
@@ -883,6 +465,7 @@ function openMediaViewer(src, type, index) {
     });
   }
   
+  // Add navigation arrows if they don't exist
   if (!document.querySelector('.viewer-nav')) {
     const viewerNav = document.createElement('div');
     viewerNav.className = 'viewer-nav';
@@ -920,6 +503,7 @@ function navigateMedia(direction) {
   
   const media = currentMediaList[currentMediaIndex];
   
+  // Update viewer without fully closing
   if (media.type === 'image') {
     viewerImage.src = media.src;
     viewerImage.style.display = 'block';
@@ -954,7 +538,7 @@ function closeMediaViewer() {
   mediaViewer.classList.remove('active');
   viewerVideo.pause();
   viewerVideo.currentTime = 0;
-  viewerVideo.controls = false;
+  viewerVideo.controls = false; // Disable controls when closing
 }
 
 // === MUSIC PLAYER ===
@@ -994,12 +578,13 @@ function initializeMusic() {
 // === PARALLAX ON ALL CONTENT ===
 function initializeParallax() {
   document.addEventListener('mousemove', (e) => {
-    if (isGalleryOpen || isAboutOpen || isPfpOpen || mediaViewer.classList.contains('active') || buyModal.classList.contains('active')) {
+    // Check if any modal is open
+    if (isGalleryOpen || isAboutOpen || mediaViewer.classList.contains('active')) {
       return; // Stop parallax if any modal is open
     }
     
-    const x = (e.clientX / window.innerWidth - 0.5) * -6;
-    const y = (e.clientY / window.innerHeight - 0.5) * -6;
+    const x = (e.clientX / window.innerWidth - 0.5) * -18;
+    const y = (e.clientY / window.innerHeight - 0.5) * -18;
     
     document.body.style.transform = `translate(${x}px, ${y}px)`;
   });
@@ -1021,7 +606,7 @@ function initializeHoverEffects() {
     });
     
     element.addEventListener('mouseleave', () => {
-      if (!galleryModal.classList.contains('active') && !aboutModal.classList.contains('active') && !pfpModal.classList.contains('active')) {
+      if (!galleryModal.classList.contains('active') && !aboutModal.classList.contains('active')) {
         blurOverlay.classList.remove('active');
       }
       
@@ -1034,15 +619,20 @@ function initializeHoverEffects() {
 
 // === ABOUT MODAL ===
 function initializeAboutModal() {
+  // Open modal when clicking the heart
   heartElement.addEventListener('click', openAboutModal);
+
+  // Close modal
   closeAbout.addEventListener('click', closeAboutModal);
 
+  // Close when clicking outside
   aboutModal.addEventListener('click', (e) => {
     if (e.target === aboutModal) {
       closeAboutModal();
     }
   });
 
+  // Prevent closing when clicking inside content
   document.querySelector('.about-content').addEventListener('click', (e) => {
     e.stopPropagation();
   });
@@ -1051,13 +641,13 @@ function initializeAboutModal() {
 function openAboutModal() {
   aboutModal.classList.add('active');
   blurOverlay.classList.add('active');
-  isAboutOpen = true;
+  isAboutOpen = true; // ← BLOCKS PARALLAX
 }
 
 function closeAboutModal() {
   aboutModal.classList.remove('active');
   blurOverlay.classList.remove('active');
-  isAboutOpen = false;
+  isAboutOpen = false; // ← RELEASES PARALLAX
 }
 
 // === BUY MODAL (HOW TO BUY) ===
@@ -1065,20 +655,25 @@ const buyModal = document.getElementById('buyModal');
 const closeBuy = document.getElementById('closeBuy');
 const computerElement = document.getElementById('computer');
 
+// Open modal or redirect (desktop vs mobile)
 computerElement.addEventListener('click', () => {
   if (window.innerWidth <= 768) {
+    // on mobile: open direct link to Jupiter
     window.open("https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups", "_blank");
   } else {
+    // on desktop: open modal with plugin
     buyModal.classList.add('active');
     blurOverlay.classList.add('active');
   }
 });
 
+// Close modal
 closeBuy.addEventListener('click', () => {
   buyModal.classList.remove('active');
   blurOverlay.classList.remove('active');
 });
 
+// Close by clicking outside
 buyModal.addEventListener('click', (e) => {
   if (e.target === buyModal) {
     buyModal.classList.remove('active');
@@ -1086,10 +681,12 @@ buyModal.addEventListener('click', (e) => {
   }
 });
 
+// Prevent closing when clicking inside content
 document.querySelector('.buy-content').addEventListener('click', (e) => {
   e.stopPropagation();
 });
 
+// Initialize Jupiter plugin
 window.Jupiter.init({
   displayMode: "integrated",
   integratedTargetId: "jupiter-terminal",
@@ -1098,36 +695,3 @@ window.Jupiter.init({
     initialOutputMint: "Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups" // $ILY
   },
 });
-
-document.getElementById('iconCa').addEventListener('click', (e) => {
-  e.preventDefault();
-  navigator.clipboard.writeText("Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups");
-  alert("Contract address copied.");
-});
-
-
-
-// === MOBILE EVENT LISTENERS === 
-document.getElementById('mobileHeart').addEventListener('click', openAboutModal);
-document.getElementById('mobileBuy').addEventListener('click', () => {
-  window.open("https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups", "_blank");
-});
-document.getElementById('mobileFrame').addEventListener('click', openGallery);
-document.getElementById('mobileLab').addEventListener('click', openPfpEditor);
-document.getElementById('mobileCa').addEventListener('click', (e) => {
-  e.preventDefault();
-  navigator.clipboard.writeText("Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups");
-  alert("Contract address copied.");
-});
-
-if (window.innerWidth <= 768) {
-
-    document.removeEventListener('mousemove', parallaxHandler);
-    
-
-    document.body.style.transform = 'none !important';
-    document.body.style.willChange = 'auto !important';
-    
-
-    document.body.style.removeProperty('transform');
-}
