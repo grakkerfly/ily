@@ -98,3 +98,10 @@ heartLink.addEventListener('click', function(e) {
   }, 800); // Time equal to animation duration
 });
 
+
+// redirect
+if (window.location.hostname === 'ilysolana.com') {
+  window.location.href = 'https://ilysolana.com/main';
+} else {
+  window.location.href = '/main';
+}
