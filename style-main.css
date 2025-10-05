@@ -1918,9 +1918,14 @@ body {
 
 @media (max-width: 768px) {
     .gallery-grid {
-        max-height: none !important;
-        height: auto !important;
-        overflow-y: visible !important;
+        max-height: calc(100vh - 300px) !important;
+        overflow-y: auto !important;
         grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+    }
+    
+    .gallery-item {
+        aspect-ratio: 1;
+        min-height: 0;
     }
 }

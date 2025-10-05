@@ -1119,3 +1119,15 @@ document.getElementById('mobileCa').addEventListener('click', (e) => {
   navigator.clipboard.writeText("Dhu2cTaaCFnws87gh1hBMPcsANKoThjHhCBxcjgAjups");
   alert("Contract address copied.");
 });
+
+if (window.innerWidth <= 768) {
+    // Remove o event listener do parallax
+    document.removeEventListener('mousemove', parallaxHandler);
+    
+    // Trava o body de vez
+    document.body.style.transform = 'none !important';
+    document.body.style.willChange = 'auto !important';
+    
+    // Remove qualquer transform
+    document.body.style.removeProperty('transform');
+}
