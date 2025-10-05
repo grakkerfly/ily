@@ -1964,9 +1964,11 @@ body {
     -webkit-transform: translateZ(0); /* evita “encavalamento” ao rolar */
   }
 
-  /* se ainda gaguejar, tire o fixed do bg só no iOS */
+
+@supports (-webkit-touch-callout: none) {
   .parallax-bg {
     position: absolute !important;
     background-attachment: scroll !important;
+    transform: none !important;
   }
 }
