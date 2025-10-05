@@ -1863,7 +1863,7 @@ body {
 }
 
 
-/* separates buttons */
+/* separated buttons */
 
     #pfp-buttons .pfp-button {
         display: inline-block !important;
@@ -1927,4 +1927,5 @@ body {
     height: auto;
     min-height: 0;
   }
+
 }
