@@ -1869,18 +1869,21 @@ body {
 
 /* BOTÕES SEPARADOS */
 
-#pfp-buttons .pfp-button {
-    border: none;
-    background: #ff5bb8;
-    font: inherit;
-    color: inherit;
-    margin: 0;
-    padding: 0;
-    text-align: inherit;
-    text-decoration: none;
-    cursor: pointer;
-}
-
+    #pfp-buttons .pfp-button {
+        display: inline-block !important;
+        padding: 12px 20px !important;
+        font-size: 12px !important;
+        font-family: 'PixelFont', monospace !important;
+        background: #ff5bb8 !important;
+        color: white !important;
+        border-radius: 8px !important;
+        margin: 2px !important;
+        cursor: pointer !important;
+        border: 2px solid #ff5bb8 !important;
+        min-width: 80px !important;
+        text-align: center !important;
+        box-shadow: 0 0 10px rgba(255, 91, 184, 0.5) !important;
+    }
 
     
 
@@ -1895,5 +1898,20 @@ body {
   .mobile-version { display: none !important; }
   .desktop-version { display: block !important; }
   .parallax-bg { background-image: url('IMAGES/bg-main.png') !important; }
+}
 
+
+
+@media (max-width: 768px) {
+    .parallax-bg {
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-attachment: fixed !important;
+    }
 }
