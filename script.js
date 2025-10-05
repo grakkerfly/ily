@@ -94,14 +94,11 @@ heartLink.addEventListener('click', function(e) {
   
   // Wait for animation to finish and then redirect
   setTimeout(() => {
-    window.location.href = 'main.html';
+    // redirect
+    if (window.location.hostname === 'ilyonsolana.com') {
+      window.location.href = 'https://ilyonsolana.com/main';
+    } else {
+      window.location.href = '/main';
+    }
   }, 800); // Time equal to animation duration
 });
-
-
-// redirect
-if (window.location.hostname === 'ilysolana.com') {
-  window.location.href = 'https://ilysolana.com/main';
-} else {
-  window.location.href = '/main';
-}
