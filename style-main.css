@@ -1930,19 +1930,43 @@ body {
     }
 }
 
-ios grid
+
+
+
+
+/* iPhone fix: altura estável + paint do grid */
 @supports (-webkit-touch-callout: none) {
   .gallery-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    align-content: flex-start !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+
+    /* não use max-height no iOS; use altura explícita com dvh */
+    height: calc(100dvh - 300px) !important;
     max-height: none !important;
-    overflow-y: visible !important;
+    overflow-y: auto !important;
+    align-content: start !important;
+    -webkit-overflow-scrolling: touch !important;
+    transform: translateZ(0); /* força nova layer no iOS */
   }
 
   .gallery-item {
-    flex: 0 0 calc(33.33% - 10px) !important;
-    margin: 5px !important;
+    aspect-ratio: 1/1 !important;
+    overflow: hidden !important;
+    min-height: 0 !important;
+  }
+
+  .gallery-item img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    -webkit-transform: translateZ(0); /* evita “encavalamento” ao rolar */
+  }
+
+  /* se ainda gaguejar, tire o fixed do bg só no iOS */
+  .parallax-bg {
+    position: absolute !important;
+    background-attachment: scroll !important;
   }
 }
