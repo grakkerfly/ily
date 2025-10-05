@@ -1569,17 +1569,20 @@ body {
 
 .parallax-bg {
   background-image: url('IMAGES/bg-main-mobile.png') !important;
-  background-size: contain !important;
-  background-position: center top !important;
-  background-repeat: no-repeat !important;
-  transform: none !important;
-  will-change: auto !important;
-  transition: none !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* trava o fundo */
+  
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
-  width: 100%;
-  height: 100vh;
+  right: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+  will-change: auto !important;
+  transition: none !important;
+  z-index: -1;
 }
 
   /* === base layout === */
@@ -1926,3 +1929,4 @@ body {
   }
 
 }
+
