@@ -1559,7 +1559,6 @@ body {
 
 /* === MOBILE VERSION - OPTIMIZED === */
 @media (max-width: 768px) {
-  /* === REMOVE PARALLAX NO MOBILE === */
   body {
     overflow-x: hidden;
     overflow-y: auto;
@@ -1733,7 +1732,7 @@ body {
   .mobile-frame img {
     width: 325px;
     height: auto;
-    margin: 10px 0 10px;
+    margin: 0px 0 10px;
   }
 
 .mobile-frame .mobile-text {
@@ -1761,7 +1760,7 @@ body {
     border-radius: 12px;
     background: rgba(255, 91, 184, 0.15);
     transition: all 0.3s ease;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
 
   .mobile-lab:active {

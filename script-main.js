@@ -1120,14 +1120,34 @@ document.getElementById('mobileCa').addEventListener('click', (e) => {
   alert("Contract address copied.");
 });
 
-if (window.innerWidth <= 768) {
-    // Remove o event listener do parallax
-    document.removeEventListener('mousemove', parallaxHandler);
+// === FIX: DISABLE PARALLAX ON MOBILE ===
+function disableParallaxOnMobile() {
+  if (window.innerWidth <= 768) {
+    // remove any movement listeners
+    document.onmousemove = null;
+    window.onmousemove = null;
     
-    // Trava o body de vez
-    document.body.style.transform = 'none !important';
-    document.body.style.willChange = 'auto !important';
-    
-    // Remove qualquer transform
-    document.body.style.removeProperty('transform');
+    // reset transforms
+    document.body.style.transform = 'none';
+    document.body.style.willChange = 'auto';
+
+    // lock background
+    const bg = document.getElementById('parallaxBg');
+    if (bg) {
+      bg.style.transform = 'none';
+      bg.style.willChange = 'auto';
+      bg.style.transition = 'none';
+      bg.style.position = 'fixed';
+      bg.style.top = '0';
+      bg.style.left = '0';
+      bg.style.backgroundImage = "url('IMAGES/bg-main-mobile.png')";
+      bg.style.backgroundAttachment = 'fixed';
+      bg.style.backgroundSize = 'cover';
+      bg.style.backgroundPosition = 'center';
+    }
+  }
 }
+
+// run on load and resize
+window.addEventListener('load', disableParallaxOnMobile);
+window.addEventListener('resize', disableParallaxOnMobile);
