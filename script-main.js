@@ -2,9 +2,9 @@
 const galleryConfig = {
   memes: {
     character1: 55,
+    character2: 26,
     people: 20,
     projects: 36,
-    character2: 26,
   },
   vids: 20
 };
