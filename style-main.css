@@ -1915,3 +1915,12 @@ body {
         background-attachment: fixed !important;
     }
 }
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        max-height: none !important;
+        height: auto !important;
+        overflow-y: visible !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
