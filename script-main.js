@@ -1121,13 +1121,13 @@ document.getElementById('mobileCa').addEventListener('click', (e) => {
 });
 
 if (window.innerWidth <= 768) {
-    // Remove o event listener do parallax
+
     document.removeEventListener('mousemove', parallaxHandler);
     
-    // Trava o body de vez
+
     document.body.style.transform = 'none !important';
     document.body.style.willChange = 'auto !important';
     
-    // Remove qualquer transform
+
     document.body.style.removeProperty('transform');
 }
