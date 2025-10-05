@@ -1873,17 +1873,18 @@ body {
 
 /* BOTÕES SEPARADOS */
 
-#pfp-buttons .pfp-button {
-    all: unset !important;
-    padding: 6px 30px !important;
-    font-size: 10px !important;
-    font-family: 'PixelFont', monospace !important;
-    background: #ff5bb8 !important;
-    color: white !important;
-    border-radius: 5px !important;
-    margin: 0 2px !important;
-    cursor: pointer !important;
-}
+    #pfp-buttons .pfp-button {
+        border: none !important;
+        background: #ff5bb8 !important;
+        color: white !important;
+        padding: 6px 30px !important;
+        font-size: 10px !important;
+        font-family: 'PixelFont', monospace !important;
+        border-radius: 5px !important;
+        margin: 0 2px !important;
+        cursor: pointer !important;
+        display: inline-block !important;
+    }
 
 
 }
