@@ -1812,7 +1812,7 @@ body {
   .about-content {
     top: 50% !important;
     transform: translate(-50%, -50%) !important;
-    height: min(85vh, 700px) !important;
+    height: min(85vh, 550px) !important;
     width: min(95vw, 400px) !important;
   }
 
@@ -1821,7 +1821,7 @@ body {
 /* PFP Editor - Layout Vertical CORRETO */
 .pfp-content {
     width: min(95vw, 400px) !important;
-    height: min(100vh, 550px) !important;
+    height: min(100vh, 600px) !important;
     padding: 40px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -1852,19 +1852,19 @@ body {
 }
 
 #pfpCanvas {
-    width: 300px !important;
-    height: 300px !important;
+    width: 200px !important;
+    height: 200px !important;
     margin: 0 !important;
-    min-width: 300px !important;
-    min-height: 300px !important;
-    max-width: 300px !important;
-    max-height: 300px !important;
+    min-width: 200px !important;
+    min-height: 200px !important;
+    max-width: 200px !important;
+    max-height: 200px !important;
 }
 
 /* SELETORES DEPOIS */
 .pfp-controls {
     order: 2 !important;
-    max-height: 225px !important;
+    max-height: 175px !important;
     width: 100% !important;
     overflow-y: auto;
     flex-shrink: 0 !important;
@@ -1897,5 +1897,4 @@ body {
   .mobile-version { display: none !important; }
   .desktop-version { display: block !important; }
   .parallax-bg { background-image: url('IMAGES/bg-main.png') !important; }
-
 }
