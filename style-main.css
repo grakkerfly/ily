@@ -1821,7 +1821,7 @@ body {
 /* PFP Editor - Layout Vertical CORRETO */
 .pfp-content {
     width: min(95vw, 400px) !important;
-    height: min(100vh, 800px) !important;
+    height: min(100vh, 550px) !important;
     padding: 40px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -1897,4 +1897,5 @@ body {
   .mobile-version { display: none !important; }
   .desktop-version { display: block !important; }
   .parallax-bg { background-image: url('IMAGES/bg-main.png') !important; }
+
 }
