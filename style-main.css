@@ -1929,3 +1929,20 @@ body {
         min-height: 0;
     }
 }
+
+ios grid
+@supports (-webkit-touch-callout: none) {
+  .gallery-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-content: flex-start !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+
+  .gallery-item {
+    flex: 0 0 calc(33.33% - 10px) !important;
+    margin: 5px !important;
+  }
+}
