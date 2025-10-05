@@ -1,5 +1,3 @@
 {
-  "redirects": [
-    { "source": "/main", "destination": "/main.html", "permanent": false }
-  ]
+  "cleanUrls": true
 }
