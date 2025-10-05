@@ -1570,6 +1570,7 @@ body {
 
 /* === MOBILE VERSION - OPTIMIZED === */
 @media (max-width: 768px) {
+
   /* === REMOVE PARALLAX NO MOBILE === */
   body {
     overflow-x: hidden;
@@ -1579,22 +1580,23 @@ body {
     position: relative;
   }
 
-    .parallax-bg {
-        background-image: url('IMAGES/bg-main-mobile.png') !important;
-        transform: none !important;
-        will-change: auto !important;
-        transition: none !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-    }
+  .parallax-bg {
+    background-image: url('IMAGES/bg-main-mobile.png') !important;
+    transform: none !important;
+    will-change: auto !important;
+    transition: none !important;
+    animation: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-attachment: fixed !important;
+  }
 
   /* === LAYOUT BASE === */
-  .desktop-version { 
-    display: none !important; 
-  }
-  
-  .mobile-version { 
+  .desktop-version { display: none !important; }
+  .mobile-version {
     position: relative;
     z-index: 2;
     display: flex !important;
@@ -1607,25 +1609,18 @@ body {
   }
 
   /* === SCROLLBAR ROSA === */
-  ::-webkit-scrollbar {
-    width: 6px !important;
-  }
-
+  ::-webkit-scrollbar { width: 6px !important; }
   ::-webkit-scrollbar-track {
     background: rgba(255, 91, 184, 0.1) !important;
     border-radius: 3px !important;
   }
-
   ::-webkit-scrollbar-thumb {
     background: #ff5bb8 !important;
     border-radius: 3px !important;
   }
+  ::-webkit-scrollbar-thumb:hover { background: #ff3da5 !important; }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: #ff3da5 !important;
-  }
-
-  /* === GLITCH EFFECT PERMANENTE PARA TODOS OS TEXTOS === */
+  /* === GLITCH EFFECT === */
   .mobile-title,
   .mobile-heart .mobile-text,
   .mobile-frame .mobile-text,
@@ -1635,34 +1630,29 @@ body {
   }
 
   @keyframes textGlitchMobile {
-    0% { 
-      text-shadow: 
-        0 0 10px rgba(255, 91, 184, 0.8),
-        2px 0 #ff5bb8, -2px 0 #7b3cff;
+    0% {
+      text-shadow: 0 0 10px rgba(255,91,184,0.8),
+      2px 0 #ff5bb8, -2px 0 #7b3cff;
       transform: translateX(0);
     }
-    25% { 
-      text-shadow: 
-        0 0 10px rgba(255, 91, 184, 0.8),
-        -2px 0 #ff5bb8, 2px 0 #7b3cff;
+    25% {
+      text-shadow: 0 0 10px rgba(255,91,184,0.8),
+      -2px 0 #ff5bb8, 2px 0 #7b3cff;
       transform: translateX(2px);
     }
-    50% { 
-      text-shadow: 
-        0 0 10px rgba(255, 91, 184, 0.8),
-        2px 0 #ff5bb8, -2px 0 #7b3cff;
+    50% {
+      text-shadow: 0 0 10px rgba(255,91,184,0.8),
+      2px 0 #ff5bb8, -2px 0 #7b3cff;
       transform: translateX(-2px);
     }
-    75% { 
-      text-shadow: 
-        0 0 10px rgba(255, 91, 184, 0.8),
-        -2px 0 #ff5bb8, 2px 0 #7b3cff;
+    75% {
+      text-shadow: 0 0 10px rgba(255,91,184,0.8),
+      -2px 0 #ff5bb8, 2px 0 #7b3cff;
       transform: translateX(1px);
     }
-    100% { 
-      text-shadow: 
-        0 0 10px rgba(255, 91, 184, 0.8),
-        2px 0 #ff5bb8, -2px 0 #7b3cff;
+    100% {
+      text-shadow: 0 0 10px rgba(255,91,184,0.8),
+      2px 0 #ff5bb8, -2px 0 #7b3cff;
       transform: translateX(0);
     }
   }
@@ -1670,14 +1660,14 @@ body {
   /* === TÍTULO === */
   .mobile-title {
     font-family: 'PixelFont', monospace;
-    font-size: 28px !important; /* Mesmo tamanho dos botões */
+    font-size: 28px !important;
     color: white !important;
     text-align: center;
     margin: 80px 0 -20px;
     line-height: 1.2;
   }
 
-  /* === HEART COM TEXTO NA FRENTE === */
+  /* === HEART COM TEXTO === */
   .mobile-heart {
     position: relative;
     cursor: pointer;
@@ -1690,17 +1680,17 @@ body {
     height: auto !important;
   }
 
-.mobile-heart .mobile-text {
+  .mobile-heart .mobile-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) !important; /* Centraliza perfeito */
+    transform: translate(-50%, -50%) !important;
     font-family: 'PixelFont', monospace;
     font-size: 26px !important;
     color: white;
     z-index: 10;
     white-space: nowrap;
-}
+  }
 
   /* === REDES SOCIAIS === */
   .mobile-social-grid {
@@ -1715,25 +1705,27 @@ body {
     height: 80px;
   }
 
-  /* === BUY ILY === */
-  .mobile-buy {
+  /* === BUY / LAB === */
+  .mobile-buy, .mobile-lab {
     font-family: 'PixelFont', monospace;
-    font-size: 22px !important; /* Tamanho padrão */
+    font-size: 22px !important;
     color: white;
     cursor: pointer;
     padding: 16px 35px;
     border: 2px solid #ff5bb8;
     border-radius: 12px;
-    background: rgba(255, 91, 184, 0.15);
+    background: rgba(255,91,184,0.15);
     transition: all 0.3s ease;
   }
 
-  .mobile-buy:active {
-    background: rgba(255, 91, 184, 0.3);
+  .mobile-buy:active, .mobile-lab:active {
+    background: rgba(255,91,184,0.3);
     transform: scale(0.95);
   }
 
-  /* === FRAME COM TEXTO NA FRENTE === */
+  .mobile-lab { margin-bottom: 30px; }
+
+  /* === FRAME COM TEXTO === */
   .mobile-frame {
     position: relative;
     cursor: pointer;
@@ -1747,64 +1739,36 @@ body {
     margin: 10px 0 10px;
   }
 
-.mobile-frame .mobile-text {
+  .mobile-frame .mobile-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) !important; /* Centraliza perfeito */
+    transform: translate(-50%, -50%) !important;
     font-family: 'PixelFont', monospace;
     font-size: 26px !important;
     color: white;
     z-index: 10;
     white-space: nowrap;
-}
-
-
-
-  /* === ILY LAB === */
-  .mobile-lab {
-    font-family: 'PixelFont', monospace;
-    font-size: 22px !important; /* Mesmo tamanho dos botões */
-    color: white;
-    cursor: pointer;
-    padding: 16px 35px;
-    border: 2px solid #ff5bb8;
-    border-radius: 12px;
-    background: rgba(255, 91, 184, 0.15);
-    transition: all 0.3s ease;
-    margin-bottom: 30px;
   }
 
-  .mobile-lab:active {
-    background: rgba(255, 91, 184, 0.3);
-    transform: scale(0.95);
+  /* === TEXTO DOS SELETORES === */
+  .trait-row span,
+  .text-control-row span,
+  .text-control-row,
+  .text-control-row input {
+    font-size: 12px !important;
   }
 
-/* === TEXTO DOS SELETORES - MOBILE === */
-.trait-row span {
-    font-size: 12px !important;
-}
-
-.text-control-row span {
-    font-size: 12px !important;
-}
-
-.text-control-row {
-    font-size: 12px !important;
+  .text-control-row {
     padding: 10px 8px !important;
-}
+  }
 
-.text-control-row input {
-    font-size: 12px !important;
+  .text-control-row input {
     padding: 6px 8px !important;
     height: 20px !important;
-}
+  }
 
-
-
-  /* === MODAIS MOBILE === */
-  
-  /* About Modal - Mais alto */
+  /* === MODAIS === */
   .about-content {
     top: 50% !important;
     transform: translate(-50%, -50%) !important;
@@ -1812,163 +1776,98 @@ body {
     width: min(95vw, 400px) !important;
   }
 
-
-
-/* PFP Editor - Layout Vertical CORRETO */
-.pfp-content {
+  /* === PFP EDITOR === */
+  .pfp-content {
     width: min(95vw, 400px) !important;
     height: min(100vh, 600px) !important;
     padding: 40px !important;
     display: flex !important;
     flex-direction: column !important;
-}
+  }
 
-.pfp-header {
+  .pfp-header {
     text-align: center;
     margin-bottom: 10px !important;
     flex-shrink: 0 !important;
-}
+  }
 
-.pfp-editor-container {
+  .pfp-editor-container {
     display: flex !important;
     flex-direction: column !important;
     gap: 15px !important;
     flex: 1 !important;
     align-items: center !important;
     margin-top: -10px !important;
-}
+  }
 
-/* PFP PRIMEIRO */
-.pfp-canvas-container {
+  .pfp-canvas-container {
     order: 1 !important;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0 !important;
-}
+  }
 
-#pfpCanvas {
+  #pfpCanvas {
     width: 200px !important;
     height: 200px !important;
-    margin: 0 !important;
-    min-width: 200px !important;
-    min-height: 200px !important;
-    max-width: 200px !important;
-    max-height: 200px !important;
-}
+  }
 
-/* SELETORES DEPOIS */
-.pfp-controls {
+  .pfp-controls {
     order: 2 !important;
     max-height: 175px !important;
     width: 100% !important;
     overflow-y: auto;
-    flex-shrink: 0 !important;
-}
+  }
 
+  #pfp-buttons .pfp-button {
+    display: inline-block !important;
+    padding: 12px 20px !important;
+    font-size: 12px !important;
+    font-family: 'PixelFont', monospace !important;
+    background: #ff5bb8 !important;
+    color: white !important;
+    border-radius: 8px !important;
+    margin: 2px !important;
+    cursor: pointer !important;
+    border: 2px solid #ff5bb8 !important;
+    min-width: 80px !important;
+    text-align: center !important;
+    box-shadow: 0 0 10px rgba(255,91,184,0.5) !important;
+  }
 
-/* BOTÕES SEPARADOS */
-
-    #pfp-buttons .pfp-button {
-        display: inline-block !important;
-        padding: 12px 20px !important;
-        font-size: 12px !important;
-        font-family: 'PixelFont', monospace !important;
-        background: #ff5bb8 !important;
-        color: white !important;
-        border-radius: 8px !important;
-        margin: 2px !important;
-        cursor: pointer !important;
-        border: 2px solid #ff5bb8 !important;
-        min-width: 80px !important;
-        text-align: center !important;
-        box-shadow: 0 0 10px rgba(255, 91, 184, 0.5) !important;
-    }
-
-    
-
-}
-
-
-
-
-
-/* === DESKTOP - MANTÉM ORIGINAL === */
-@media (min-width: 769px) {
-  .mobile-version { display: none !important; }
-  .desktop-version { display: block !important; }
-  .parallax-bg { background-image: url('IMAGES/bg-main.png') !important; }
-}
-
-
-
-@media (max-width: 768px) {
-    .parallax-bg {
-        transform: none !important;
-        transition: none !important;
-        animation: none !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        background-attachment: fixed !important;
-    }
-}
-
-@media (max-width: 768px) {
-    .gallery-grid {
-        max-height: calc(100vh - 300px) !important;
-        overflow-y: auto !important;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 10px !important;
-    }
-    
-    .gallery-item {
-        aspect-ratio: 1;
-        min-height: 0;
-    }
-}
-
-
-
-
-
-/* iPhone fix: altura estável + paint do grid */
-@supports (-webkit-touch-callout: none) {
+  /* === GALLERY GRID === */
   .gallery-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-
-    /* não use max-height no iOS; use altura explícita com dvh */
-    height: calc(100dvh - 300px) !important;
-    max-height: none !important;
+    max-height: calc(100vh - 300px) !important;
     overflow-y: auto !important;
-    align-content: start !important;
-    -webkit-overflow-scrolling: touch !important;
-    transform: translateZ(0); /* força nova layer no iOS */
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
   }
 
   .gallery-item {
-    aspect-ratio: 1/1 !important;
-    overflow: hidden !important;
-    min-height: 0 !important;
+    aspect-ratio: 1;
+    min-height: 0;
   }
+}
 
-  .gallery-item img {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    -webkit-transform: translateZ(0); /* evita “encavalamento” ao rolar */
-  }
-
-
+/* === iPHONE FIX === */
 @supports (-webkit-touch-callout: none) {
+  .gallery-grid {
+    max-height: none !important;
+    height: auto !important;
+    overflow-y: visible !important;
+  }
+
   .parallax-bg {
     position: absolute !important;
     background-attachment: scroll !important;
     transform: none !important;
   }
+}
+
+/* === DESKTOP === */
+@media (min-width: 769px) {
+  .mobile-version { display: none !important; }
+  .desktop-version { display: block !important; }
+  .parallax-bg { background-image: url('IMAGES/bg-main.png') !important; }
 }
