@@ -1871,19 +1871,3 @@ body {
   .desktop-version { display: block !important; }
   .parallax-bg { background-image: url('IMAGES/bg-main.png') !important; }
 }
-
-
-
-
-
-@supports (-webkit-touch-callout: none) {
-  .gallery-grid {
-    overflow-y: scroll !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  html, body {
-    height: 100% !important;
-    overflow-y: auto !important;
-  }
-}
