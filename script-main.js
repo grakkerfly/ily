@@ -1,8 +1,8 @@
 // === GALLERY CONFIGURATION ===
 const galleryConfig = {
   memes: {
+    character2: 38,
     character1: 55,
-    character2: 26,
     people: 20,
     projects: 36,
   },
@@ -43,7 +43,7 @@ const downloadPfpBtn = document.getElementById('downloadPfpBtn');
 
 // Gallery state
 let currentTab = 'memes';
-let currentCategory = 'character1';
+let currentCategory = 'character2';
 let isGalleryOpen = false;
 let isAboutOpen = false;
 let isPfpOpen = false;
@@ -551,9 +551,9 @@ function closeGalleryModal() {
 function switchTab(tab) {
   currentTab = tab;
   
-  if (tab === 'memes') {
-    currentCategory = Object.keys(galleryConfig.memes)[0];
-  }
+if (tab === 'memes') {
+  currentCategory = Object.keys(galleryConfig.memes)[0];
+}
   
   tabButtons.forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === tab);
@@ -580,12 +580,22 @@ function loadCategories() {
   
   if (currentTab === 'memes') {
     const categories = Object.keys(galleryConfig.memes);
+
+    // custom names
+    const categoryNames = {
+      character1: 'AI MEMES',
+      character2: 'CHARACTER',
+      people: 'PEOPLE',
+      projects: 'PROJECTS'
+    };
     
     categories.forEach(category => {
       if (galleryConfig.memes[category] > 0) {
         const btn = document.createElement('button');
+        btn.dataset.category = category;
         btn.className = `category-btn ${category === currentCategory ? 'active' : ''}`;
-        btn.textContent = category.toUpperCase();
+        // usa o nome customizado se existir
+        btn.textContent = categoryNames[category] || category.toUpperCase();
         btn.addEventListener('click', () => filterByCategory(category));
         categoryFilters.appendChild(btn);
       }
@@ -595,9 +605,9 @@ function loadCategories() {
 
 function filterByCategory(category) {
   currentCategory = category;
-  
+
   document.querySelectorAll('.category-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
+    btn.classList.toggle('active', btn.dataset.category === category);
   });
   
   if (currentTab === 'memes') {
