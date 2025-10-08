@@ -389,7 +389,7 @@ function randomizePfpTraits() {
 
     pfpState[trait] = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    if (trait === "glasses" && Math.random() < 0.5) {
+    if (trait === "glasses" && Math.random() < 0.6) {
       pfpState[trait] = 0;
     } else if (pfpOptionalTraits.includes(trait) && Math.random() < 0.1) {
       pfpState[trait] = 0;
@@ -1182,4 +1182,5 @@ function disableParallaxOnMobile() {
 // run on load and resize
 window.addEventListener('load', disableParallaxOnMobile);
 window.addEventListener('resize', disableParallaxOnMobile);
+
 
