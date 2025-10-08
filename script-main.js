@@ -52,13 +52,13 @@ let currentMediaList = [];
 
 // === PFP EDITOR CONFIGURATION ===
 const pfpConfig = {
-  overlay: 10,
-  accessories: 6,
+  overlay: 15,
+  accessories: 11,
   glasses: 9,
   eyes: 8,
   earrings: 7,
-  shirt: 12,
-  hair: 9,
+  shirt: 20,
+  hair: 13,
   brows: 1,
   muzzle: 2,
   body: 5,
@@ -170,6 +170,7 @@ function initializePfpControls() {
     row.appendChild(left);
     row.appendChild(label);
     row.appendChild(right);
+  if (trait === "brows") row.style.display = "none";
     pfpControls.appendChild(row);
     
     // Arrow events
@@ -381,15 +382,33 @@ function drawPfpTrait(img, trait, num, context, w, h) {
 
 function randomizePfpTraits() {
   for (let trait in pfpConfig) {
-    if (trait === "shirt") {
-      pfpState[trait] = Math.floor(Math.random() * (pfpConfig[trait] - 1)) + 2;
-    } else if (pfpOptionalTraits.includes(trait)) {
-      pfpState[trait] = Math.floor(Math.random() * (pfpConfig[trait] + 1));
-    } else {
-      pfpState[trait] = Math.floor(Math.random() * pfpConfig[trait]) + 1;
+    let max = pfpConfig[trait];
+    let min = pfpOptionalTraits.includes(trait) ? 0 : 1;
+
+    if (trait === "shirt") min = 2;
+
+    pfpState[trait] = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    if (pfpOptionalTraits.includes(trait) && Math.random() < 0.1) {
+      pfpState[trait] = 0;
     }
-    pfpTraitLabels[trait].innerText = `${trait}: ${pfpState[trait] === 0 ? "none" : pfpState[trait]}`;
+
+    if (pfpTraitLabels[trait]) {
+      pfpTraitLabels[trait].innerText = `${trait}: ${pfpState[trait] === 0 ? "none" : pfpState[trait]}`;
+    }
   }
+
+  if (pfpState.eyes === 8 && [2, 3, 4, 9].includes(pfpState.glasses)) {
+    let invalid = [2, 3, 4, 9];
+    let validGlasses = [];
+
+    for (let i = 1; i <= pfpConfig.glasses; i++) {
+      if (!invalid.includes(i)) validGlasses.push(i);
+    }
+
+    pfpState.glasses = validGlasses[Math.floor(Math.random() * validGlasses.length)];
+  }
+
   renderPfp();
 }
 
