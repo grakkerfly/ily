@@ -1185,3 +1185,232 @@ window.addEventListener('resize', disableParallaxOnMobile);
 
 
 
+
+
+
+
+
+
+
+
+// === ILY LAB TEXT INTERACT (MOVE / ROTATE / SCALE) ===
+(function() {
+  const ctx = pfpCanvas.getContext("2d");
+  const texts = {
+    top: { x: pfpCanvas.width / 2, y: 45, size: 70, rotation: 0 },
+    bottom: { x: pfpCanvas.width / 2, y: pfpCanvas.height - 45, size: 70, rotation: 0 }
+  };
+  let active = null, dragging = false, rotating = false, resizing = false, offset = { x: 0, y: 0 };
+
+  const originalRender = renderPfp;
+  renderPfp = function() {
+    originalRender();
+    drawSelection();
+  };
+
+  function drawSelection() {
+    if (!active) return;
+    const obj = texts[active];
+    const text = active === "top" ? pfpState.textTop : pfpState.textBottom;
+    if (!text) return;
+
+    ctx.save();
+    ctx.translate(obj.x, obj.y);
+    ctx.rotate(obj.rotation * Math.PI / 180);
+    ctx.font = `bold ${obj.size}px Impact, Arial Black, sans-serif`;
+    const width = ctx.measureText(text).width;
+    const height = obj.size;
+
+    // selection box
+    ctx.strokeStyle = "#ff5bb8";
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    ctx.strokeRect(-width / 2 - 10, -height / 2 - 10, width + 20, height + 20);
+    ctx.setLineDash([]);
+
+    // handles
+    const hw = width / 2 + 10, hh = height / 2 + 10;
+    const handles = [
+      [-hw, -hh], [0, -hh], [hw, -hh],
+      [-hw, 0], [hw, 0],
+      [-hw, hh], [0, hh], [hw, hh]
+    ];
+    handles.forEach(([x, y]) => drawSquareHandle(x, y));
+
+    // rotation handle
+    drawRotateHandle(0, -hh - 35);
+    ctx.restore();
+  }
+
+  function drawSquareHandle(x, y) {
+    ctx.beginPath();
+    ctx.rect(x - 6, y - 6, 12, 12);
+    ctx.fillStyle = "#ff5bb8";
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 1.5;
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  function drawRotateHandle(x, y) {
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, Math.PI * 2);
+    ctx.fillStyle = "#ff5bb8";
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#fff";
+    ctx.stroke();
+
+    // rotation icon
+    ctx.beginPath();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 2;
+    ctx.arc(x, y, 5, Math.PI * 0.2, Math.PI * 1.6);
+    ctx.moveTo(x + 4, y - 3);
+    ctx.lineTo(x + 8, y - 6);
+    ctx.lineTo(x + 6, y - 1);
+    ctx.stroke();
+  }
+
+  function getPos(e) {
+    const touch = e.touches ? e.touches[0] : e;
+    const r = pfpCanvas.getBoundingClientRect();
+    return {
+      x: ((touch.clientX - r.left) / r.width) * pfpCanvas.width,
+      y: ((touch.clientY - r.top) / r.height) * pfpCanvas.height
+    };
+  }
+
+  function inside(mx, my, obj, text) {
+    ctx.save();
+    ctx.translate(obj.x, obj.y);
+    ctx.rotate(obj.rotation * Math.PI / 180);
+    ctx.font = `bold ${obj.size}px Impact, Arial Black, sans-serif`;
+    const w = ctx.measureText(text).width, h = obj.size;
+    const dx = mx - obj.x, dy = my - obj.y;
+    const rx = dx * Math.cos(-obj.rotation * Math.PI / 180) - dy * Math.sin(-obj.rotation * Math.PI / 180);
+    const ry = dx * Math.sin(-obj.rotation * Math.PI / 180) + dy * Math.cos(-obj.rotation * Math.PI / 180);
+    ctx.restore();
+    return rx > -w / 2 - 10 && rx < w / 2 + 10 && ry > -h / 2 - 10 && ry < h / 2 + 10;
+  }
+
+  function hitHandle(mx, my, obj, text) {
+    ctx.font = `bold ${obj.size}px Impact, Arial Black, sans-serif`;
+    const w = ctx.measureText(text).width, h = obj.size;
+    const rot = obj.rotation * Math.PI / 180;
+
+    const hh = h / 2 + 10, hw = w / 2 + 10;
+    const handlePoints = [
+      [-hw, -hh], [0, -hh], [hw, -hh],
+      [-hw, 0], [hw, 0],
+      [-hw, hh], [0, hh], [hw, hh]
+    ].map(([x, y]) => ({
+      x: obj.x + x * Math.cos(rot) - y * Math.sin(rot),
+      y: obj.y + x * Math.sin(rot) + y * Math.cos(rot)
+    }));
+
+    const rotatePt = { x: obj.x, y: obj.y - Math.cos(rot) * (hh + 45) };
+
+    for (let pt of handlePoints) {
+      if (Math.hypot(mx - pt.x, my - pt.y) < 10) return "resize";
+    }
+    if (Math.hypot(mx - rotatePt.x, my - rotatePt.y) < 12) return "rotate";
+    return null;
+  }
+
+  function startAction(e) {
+    e.preventDefault();
+    const pos = getPos(e);
+    let clickedSomething = false;
+    active = null;
+
+    for (let key in texts) {
+      const obj = texts[key];
+      const text = key === "top" ? pfpState.textTop : pfpState.textBottom;
+      if (!text) continue;
+
+      const handle = hitHandle(pos.x, pos.y, obj, text);
+      if (handle) {
+        active = key;
+        clickedSomething = true;
+        if (handle === "resize") resizing = true;
+        if (handle === "rotate") rotating = true;
+        break;
+      }
+
+      if (inside(pos.x, pos.y, obj, text)) {
+        active = key;
+        dragging = true;
+        clickedSomething = true;
+        offset.x = pos.x - obj.x;
+        offset.y = pos.y - obj.y;
+        break;
+      }
+    }
+
+    // deselect if clicked on empty area
+    if (!clickedSomething) {
+      active = null;
+      renderPfp();
+    }
+  }
+
+  function moveAction(e) {
+    if (!active) return;
+    e.preventDefault();
+    const obj = texts[active];
+    const pos = getPos(e);
+
+    if (dragging) {
+      obj.x = pos.x - offset.x;
+      obj.y = pos.y - offset.y;
+    } else if (resizing) {
+      const dx = pos.x - obj.x, dy = pos.y - obj.y;
+      obj.size = Math.max(20, Math.min(150, Math.sqrt(dx * dx + dy * dy) / 3));
+    } else if (rotating) {
+      const angle = Math.atan2(pos.y - obj.y, pos.x - obj.x);
+      obj.rotation = angle * 180 / Math.PI;
+    }
+
+    renderPfp();
+  }
+
+  function endAction() {
+    dragging = resizing = rotating = false;
+  }
+
+  // mouse events
+  pfpCanvas.addEventListener("mousedown", startAction);
+  pfpCanvas.addEventListener("mousemove", moveAction);
+  pfpCanvas.addEventListener("mouseup", endAction);
+
+  // touch events
+  pfpCanvas.addEventListener("touchstart", startAction, { passive: false });
+  pfpCanvas.addEventListener("touchmove", moveAction, { passive: false });
+  pfpCanvas.addEventListener("touchend", endAction);
+
+  drawMemeText = function(ctx, text, position, canvas) {
+    const key = position === "top" ? "top" : "bottom";
+    const obj = texts[key];
+    if (!text) return;
+
+    ctx.save();
+    ctx.translate(obj.x, obj.y);
+    ctx.rotate(obj.rotation * Math.PI / 180);
+    ctx.font = `normal ${obj.size}px Impact, Arial Black, sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+
+    ctx.fillStyle = "black";
+    ctx.lineWidth = 20;
+    ctx.fillText(text, -2, -2);
+    ctx.fillText(text, 2, -2);
+    ctx.fillText(text, -2, 2);
+    ctx.fillText(text, 2, 2);
+
+    ctx.fillStyle = "white";
+    ctx.fillText(text, 0, 0);
+    ctx.restore();
+  };
+})();
+
