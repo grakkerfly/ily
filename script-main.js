@@ -1,7 +1,7 @@
 // === GALLERY CONFIGURATION ===
 const galleryConfig = {
   memes: {
-    character2: 78,
+    character2: 157,
     character1: 55,
     people: 20,
     projects: 36,
@@ -1413,5 +1413,6 @@ window.addEventListener('resize', disableParallaxOnMobile);
     ctx.restore();
   };
 })();
+
 
 
